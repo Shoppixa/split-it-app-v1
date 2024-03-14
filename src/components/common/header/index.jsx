@@ -1,9 +1,9 @@
-import Navbar from "./navbar.jsx";
+import AppNavbar from "./navbar/index.jsx";
 
 const Header = () => {
   return (
     <>
-      <Navbar />
+      <AppNavbar is_logged_in={true} />
     </>
   );
 };
