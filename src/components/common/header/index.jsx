@@ -1,4 +1,10 @@
+import Navbar from "./navbar.jsx";
+
 const Header = () => {
-  return <h1>Header</h1>;
+  return (
+    <>
+      <Navbar />
+    </>
+  );
 };
 export default Header;
