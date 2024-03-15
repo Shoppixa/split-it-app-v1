@@ -50,7 +50,7 @@ function AppNavbar(props) {
         <>
             <div>
                 <AppBar
-                    position="fixed"
+                    position="sticky"
                     sx={{
                         boxShadow: 0,
                         bgcolor: 'transparent',
@@ -107,6 +107,7 @@ function AppNavbar(props) {
                             </Box>
                         </Box>
                         <Box
+                            className="loginButtonsBox"
                             sx={{
                                 display: { xs: 'none', md: 'flex' },
                                 gap: 0.5,

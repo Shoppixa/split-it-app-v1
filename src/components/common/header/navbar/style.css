@@ -2,14 +2,27 @@
     margin-top: 0px;
     margin-bottom: 7px;
 }
+
 .logoText {
     font-weight: bolder;
 }
-.logoLink {
-    color: #1976d2;
-    text-decoration: none;
-    margin-left: 50px;
-    margin-right: 50px;
+
+@media screen and (max-width: 600px) {
+    .logoLink {
+        color: #1976d2;
+        text-decoration: none;
+        margin-left: 10px;
+    }
 }
-.inputBox {
+
+@media screen and (min-width: 600px) {
+    .logoLink {
+        color: #1976d2;
+        text-decoration: none;
+        margin-left: 50px;
+        margin-right: 50px;
+    }
+    .loginButtonsBox {
+        margin-right: 50px;
+    }
 }
