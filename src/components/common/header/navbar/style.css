@@ -1,9 +1,15 @@
 .logo {
-  margin-top: 0px;
-  margin-bottom: 7px;
-  color: #1976d2;
+    margin-top: 0px;
+    margin-bottom: 7px;
 }
 .logoText {
-  color: #1976d2;
-  font-weight: bolder;
+    font-weight: bolder;
+}
+.logoLink {
+    color: #1976d2;
+    text-decoration: none;
+    margin-left: 50px;
+    margin-right: 50px;
+}
+.inputBox {
 }

@@ -1,222 +1,259 @@
-import * as React from "react";
+import * as React from 'react'
 
-import Box from "@mui/material/Box";
-import AppBar from "@mui/material/AppBar";
-import Toolbar from "@mui/material/Toolbar";
-import Button from "@mui/material/Button";
-import Divider from "@mui/material/Divider";
-import Typography from "@mui/material/Typography";
-import MenuItem from "@mui/material/MenuItem";
-import Drawer from "@mui/material/Drawer";
-import MenuIcon from "@mui/icons-material/Menu";
-import PropTypes from "prop-types";
-import ReceiptLongIcon from "@mui/icons-material/ReceiptLong";
-import "./style.css";
+import LoginModal from '../../../login_modal/index.jsx'
+import AppBar from '@mui/material/AppBar'
+import Toolbar from '@mui/material/Toolbar'
+import Button from '@mui/material/Button'
+import Divider from '@mui/material/Divider'
+import Typography from '@mui/material/Typography'
+import MenuItem from '@mui/material/MenuItem'
+import Drawer from '@mui/material/Drawer'
+import MenuIcon from '@mui/icons-material/Menu'
+import PropTypes from 'prop-types'
+import ReceiptLongIcon from '@mui/icons-material/ReceiptLong'
+import './style.css'
+import Box from '@mui/material/Box'
+import RegisterModal from '../../../register_modal/index.jsx'
+import { Link } from 'react-router-dom'
 
 const logoStyle = {
-  width: "140px",
-  height: "auto",
-  cursor: "pointer",
-};
-
-function Navbar(props) {
-  const is_logged_in = props.is_logged_in;
-  const logged_in_pages = [
-    "Dashboard",
-    "Profile",
-    "Groups",
-    "Features",
-    "Pricing",
-    "FAQ",
-  ];
-  const logged_out_pages = ["Features", "Pricing", "FAQ"];
-  const pages = is_logged_in ? logged_in_pages : logged_out_pages;
-
-  const [open, setOpen] = React.useState(false);
-
-  const toggleDrawer = (newOpen) => () => {
-    setOpen(newOpen);
-  };
-
-  return (
-    <div>
-      <AppBar
-        position="fixed"
-        sx={{
-          boxShadow: 0,
-          bgcolor: "transparent",
-          backgroundImage: "none",
-        }}
-      >
-        <Toolbar
-          variant="regular"
-          sx={(theme) => ({
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "space-between",
-            flexShrink: 0,
-            maxHeight: 40,
-            border: "1px solid",
-            borderColor: "divider",
-          })}
-        >
-          <Box
-            sx={{
-              flexGrow: 1,
-              display: "flex",
-              alignItems: "center",
-              ml: "-18px",
-              px: 0,
-            }}
-          >
-            <ReceiptLongIcon className="logo" fontSize={"large"} />
-            <h4 className="logoText" style={logoStyle}>
-              {props.app_name}
-            </h4>
-            <Box sx={{ display: { xs: "none", md: "flex" } }}>
-              {pages.map((page) => (
-                <MenuItem
-                  key={pages.indexOf(page)}
-                  sx={{ py: "6px", px: "12px" }}
-                >
-                  <Typography variant="body2" color="text.primary">
-                    {page}
-                  </Typography>
-                </MenuItem>
-              ))}
-            </Box>
-          </Box>
-          <Box
-            sx={{
-              display: { xs: "none", md: "flex" },
-              gap: 0.5,
-              alignItems: "center",
-            }}
-          >
-            {is_logged_in ? (
-              <>
-                <Button
-                  color="primary"
-                  variant="contained"
-                  size="small"
-                  component="a"
-                  href="/material-ui/getting-started/templates/sign-in/"
-                  target="_blank"
-                >
-                  Logout
-                </Button>
-              </>
-            ) : (
-              <>
-                <Button
-                  color="primary"
-                  variant="text"
-                  size="small"
-                  component="a"
-                  href="/material-ui/getting-started/templates/sign-in/"
-                  target="_blank"
-                >
-                  Sign in
-                </Button>
-                <Button
-                  color="primary"
-                  variant="contained"
-                  size="small"
-                  component="a"
-                  href="/material-ui/getting-started/templates/sign-up/"
-                  target="_blank"
-                >
-                  Sign up
-                </Button>
-              </>
-            )}
-          </Box>
-          <Box sx={{ display: { sm: "", md: "none" } }}>
-            <Button
-              variant="text"
-              color="primary"
-              aria-label="menu"
-              onClick={toggleDrawer(true)}
-              sx={{ minWidth: "30px", p: "4px" }}
-            >
-              <MenuIcon />
-            </Button>
-            <Drawer anchor="right" open={open} onClose={toggleDrawer(false)}>
-              <Box
-                sx={{
-                  minWidth: "60dvw",
-                  p: 2,
-                  backgroundColor: "background.paper",
-                  flexGrow: 1,
-                }}
-              >
-                <Box
-                  sx={{
-                    display: "flex",
-                    flexDirection: "column",
-                    alignItems: "end",
-                    flexGrow: 1,
-                  }}
-                ></Box>
-                {pages.map((page) => (
-                  <MenuItem key={pages.indexOf(page)}>{page}</MenuItem>
-                ))}
-                <Divider />
-                {is_logged_in ? (
-                  <>
-                    <MenuItem>
-                      <Button
-                        color="primary"
-                        variant="contained"
-                        component="a"
-                        href="/material-ui/getting-started/templates/sign-in/"
-                        target="_blank"
-                        sx={{ width: "100%" }}
-                      >
-                        Logout
-                      </Button>
-                    </MenuItem>
-                  </>
-                ) : (
-                  <>
-                    <MenuItem>
-                      <Button
-                        color="primary"
-                        variant="contained"
-                        component="a"
-                        href="/material-ui/getting-started/templates/sign-up/"
-                        target="_blank"
-                        sx={{ width: "100%" }}
-                      >
-                        Sign up
-                      </Button>
-                    </MenuItem>
-                    <MenuItem>
-                      <Button
-                        color="primary"
-                        variant="outlined"
-                        component="a"
-                        href="/material-ui/getting-started/templates/sign-in/"
-                        target="_blank"
-                        sx={{ width: "100%" }}
-                      >
-                        Sign in
-                      </Button>
-                    </MenuItem>
-                  </>
-                )}
-              </Box>
-            </Drawer>
-          </Box>
-        </Toolbar>
-      </AppBar>
-    </div>
-  );
+    height: 'auto',
+    cursor: 'pointer',
 }
 
-export default Navbar;
+function AppNavbar(props) {
+    const is_logged_in = props.is_logged_in
+    const logged_in_pages = [
+        'Dashboard',
+        'Profile',
+        'Groups',
+        'Features',
+        'Pricing',
+        'FAQ',
+    ]
+    const logged_out_pages = ['Features', 'Pricing', 'FAQ']
+    const pages = is_logged_in ? logged_in_pages : logged_out_pages
 
-Navbar.propTypes = {
-  is_logged_in: PropTypes.bool,
-  app_name: PropTypes.string,
-};
+    const [open, setOpen] = React.useState(false)
+    const [openLoginModal, setOpenLoginModal] = React.useState(false)
+    const [openReisterModal, setOpenResigterModal] = React.useState(false)
+    const handleOpenLoginModal = () => setOpenLoginModal(true)
+    const handleCloseLoginModal = () => setOpenLoginModal(false)
+    const handleOpenRegisterModal = () => setOpenResigterModal(true)
+    const handleCloseRegisterModal = () => setOpenResigterModal(false)
+
+    const toggleDrawer = (newOpen) => () => {
+        setOpen(newOpen)
+    }
+
+    return (
+        <>
+            <div>
+                <AppBar
+                    position="fixed"
+                    sx={{
+                        boxShadow: 0,
+                        bgcolor: 'transparent',
+                        backgroundImage: 'none',
+                    }}
+                >
+                    <Toolbar
+                        variant="regular"
+                        sx={() => ({
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'space-between',
+                            flexShrink: 0,
+                            maxHeight: 40,
+                            border: '1px solid',
+                            borderColor: 'divider',
+                        })}
+                    >
+                        <Box
+                            sx={{
+                                flexGrow: 1,
+                                display: 'flex',
+                                alignItems: 'center',
+                                ml: '-18px',
+                                px: 0,
+                            }}
+                        >
+                            <Link
+                                to="/"
+                                className="d-flex logoLink align-items-center"
+                            >
+                                <ReceiptLongIcon
+                                    className="logo"
+                                    fontSize={'large'}
+                                />
+                                <h4 className="logoText" style={logoStyle}>
+                                    {props.app_name}
+                                </h4>
+                            </Link>
+                            <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
+                                {pages.map((page) => (
+                                    <MenuItem
+                                        key={pages.indexOf(page)}
+                                        sx={{ py: '6px', px: '12px' }}
+                                    >
+                                        <Typography
+                                            variant="body2"
+                                            color="text.primary"
+                                        >
+                                            {page}
+                                        </Typography>
+                                    </MenuItem>
+                                ))}
+                            </Box>
+                        </Box>
+                        <Box
+                            sx={{
+                                display: { xs: 'none', md: 'flex' },
+                                gap: 0.5,
+                                alignItems: 'center',
+                            }}
+                        >
+                            {is_logged_in ? (
+                                <>
+                                    <Button
+                                        color="primary"
+                                        variant="contained"
+                                        size="small"
+                                        component="a"
+                                        target="_blank"
+                                    >
+                                        Logout
+                                    </Button>
+                                </>
+                            ) : (
+                                <>
+                                    <Button
+                                        color="primary"
+                                        variant="text"
+                                        size="small"
+                                        component="a"
+                                        target="_blank"
+                                        onClick={handleOpenLoginModal}
+                                    >
+                                        Sign in
+                                    </Button>
+                                    <Button
+                                        color="primary"
+                                        variant="contained"
+                                        size="small"
+                                        component="a"
+                                        target="_blank"
+                                        onClick={handleOpenRegisterModal}
+                                    >
+                                        Sign up
+                                    </Button>
+                                </>
+                            )}
+                        </Box>
+                        <Box sx={{ display: { sm: '', md: 'none' } }}>
+                            <Button
+                                variant="text"
+                                color="primary"
+                                aria-label="menu"
+                                onClick={toggleDrawer(true)}
+                                sx={{ minWidth: '30px', p: '4px' }}
+                            >
+                                <MenuIcon />
+                            </Button>
+                            <Drawer
+                                anchor="right"
+                                open={open}
+                                onClose={toggleDrawer(false)}
+                            >
+                                <Box
+                                    sx={{
+                                        minWidth: '60dvw',
+                                        p: 2,
+                                        backgroundColor: 'background.paper',
+                                        flexGrow: 1,
+                                    }}
+                                >
+                                    <Box
+                                        sx={{
+                                            display: 'flex',
+                                            flexDirection: 'column',
+                                            alignItems: 'end',
+                                            flexGrow: 1,
+                                        }}
+                                    ></Box>
+                                    {pages.map((page) => (
+                                        <MenuItem key={pages.indexOf(page)}>
+                                            {page}
+                                        </MenuItem>
+                                    ))}
+                                    <Divider />
+                                    {is_logged_in ? (
+                                        <>
+                                            <MenuItem>
+                                                <Button
+                                                    color="primary"
+                                                    variant="contained"
+                                                    component="a"
+                                                    target="_blank"
+                                                    sx={{ width: '100%' }}
+                                                >
+                                                    Logout
+                                                </Button>
+                                            </MenuItem>
+                                        </>
+                                    ) : (
+                                        <>
+                                            <MenuItem>
+                                                <Button
+                                                    color="primary"
+                                                    variant="outlined"
+                                                    component="a"
+                                                    target="_blank"
+                                                    sx={{ width: '100%' }}
+                                                    onClick={
+                                                        handleOpenLoginModal
+                                                    }
+                                                >
+                                                    Sign in
+                                                </Button>
+                                            </MenuItem>
+                                            <MenuItem>
+                                                <Button
+                                                    color="primary"
+                                                    variant="contained"
+                                                    component="a"
+                                                    target="_blank"
+                                                    sx={{ width: '100%' }}
+                                                    onClick={
+                                                        handleOpenRegisterModal
+                                                    }
+                                                >
+                                                    Sign up
+                                                </Button>
+                                            </MenuItem>
+                                        </>
+                                    )}
+                                </Box>
+                            </Drawer>
+                        </Box>
+                    </Toolbar>
+                </AppBar>
+            </div>
+            <LoginModal
+                openLoginModal={openLoginModal}
+                handleCloseLoginModal={handleCloseLoginModal}
+            />
+            <RegisterModal
+                openRegisterModal={openReisterModal}
+                handleCloseRegisterModal={handleCloseRegisterModal}
+            />
+        </>
+    )
+}
+
+export default AppNavbar
+
+AppNavbar.propTypes = {
+    is_logged_in: PropTypes.bool,
+    app_name: PropTypes.string,
+}
