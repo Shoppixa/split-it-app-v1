@@ -1,4 +1,11 @@
+import AppNavbar from "./navbar/index.jsx";
+import "./style.css";
+
 const Header = () => {
-  return <h1>Header</h1>;
+  return (
+    <div className="header">
+      <AppNavbar is_logged_in={true} app_name={import.meta.env.VITE_APP_NAME} />
+    </div>
+  );
 };
 export default Header;
