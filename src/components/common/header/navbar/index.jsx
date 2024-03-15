@@ -9,6 +9,9 @@ import Typography from "@mui/material/Typography";
 import MenuItem from "@mui/material/MenuItem";
 import Drawer from "@mui/material/Drawer";
 import MenuIcon from "@mui/icons-material/Menu";
+import PropTypes from "prop-types";
+import ReceiptLongIcon from "@mui/icons-material/ReceiptLong";
+import "./style.css";
 
 const logoStyle = {
   width: "140px",
@@ -75,16 +78,16 @@ function Navbar(props) {
               px: 0,
             }}
           >
-            <img
-              src={
-                "https://assets-global.website-files.com/61ed56ae9da9fd7e0ef0a967/61f12e6faf73568658154dae_SitemarkDefault.svg"
-              }
-              style={logoStyle}
-              alt="logo of sitemark"
-            />
+            <ReceiptLongIcon className="logo" fontSize={"large"} />
+            <h4 className="logoText" style={logoStyle}>
+              {props.app_name}
+            </h4>
             <Box sx={{ display: { xs: "none", md: "flex" } }}>
               {pages.map((page) => (
-                <MenuItem sx={{ py: "6px", px: "12px" }}>
+                <MenuItem
+                  key={pages.indexOf(page)}
+                  sx={{ py: "6px", px: "12px" }}
+                >
                   <Typography variant="body2" color="text.primary">
                     {page}
                   </Typography>
@@ -165,7 +168,7 @@ function Navbar(props) {
                   }}
                 ></Box>
                 {pages.map((page) => (
-                  <MenuItem>{page}</MenuItem>
+                  <MenuItem key={pages.indexOf(page)}>{page}</MenuItem>
                 ))}
                 <Divider />
                 {is_logged_in ? (
@@ -221,3 +224,8 @@ function Navbar(props) {
 }
 
 export default Navbar;
+
+Navbar.propTypes = {
+  is_logged_in: PropTypes.bool,
+  app_name: PropTypes.string,
+};
