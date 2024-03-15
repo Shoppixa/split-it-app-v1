@@ -7,7 +7,7 @@ import Homepage from "./pages/home/index.jsx";
 function App() {
   return (
     <Router>
-      <div className="App bg-primary bg-opacity-10">
+      <div className="App">
         <Header />
         <Routes>
           <Route path="/" element={<Homepage />} />
