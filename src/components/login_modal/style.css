@@ -1,0 +1,19 @@
+@media screen and (max-width: 600px) {
+    .loginModalBody {
+        width: 90%;
+        max-height: 90%;
+        overflow: scroll;
+    }
+    .brandImage {
+        width: 25%;
+    }
+}
+
+@media screen and (min-width: 600px) {
+    .loginModalBody {
+        width: 25%;
+    }
+    .brandImage {
+        width: 25%;
+    }
+}
