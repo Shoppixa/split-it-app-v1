@@ -87,7 +87,8 @@ function AppNavbar(props) {
                                     fontSize={'large'}
                                 />
                                 <h4 className="logoText" style={logoStyle}>
-                                    {props.app_name}
+                                    {import.meta.env.VITE_APP_TITLE ||
+                                        'ECOM App'}
                                 </h4>
                             </Link>
                             <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
@@ -256,5 +257,4 @@ export default AppNavbar
 
 AppNavbar.propTypes = {
     is_logged_in: PropTypes.bool,
-    app_name: PropTypes.string,
 }
