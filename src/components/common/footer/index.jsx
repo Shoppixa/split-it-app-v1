@@ -1,21 +1,24 @@
-import Box from '@mui/material/Box'
-import IconButton from '@mui/material/IconButton'
 import Link from '@mui/material/Link'
-import Stack from '@mui/material/Stack'
 import Typography from '@mui/material/Typography'
-
-import FacebookIcon from '@mui/icons-material/GitHub'
-import LinkedInIcon from '@mui/icons-material/LinkedIn'
-import TwitterIcon from '@mui/icons-material/X'
-import PropTypes from 'prop-types'
 import './style.css'
+import FacebookIcon from '@mui/icons-material/Facebook'
+import XIcon from '@mui/icons-material/X'
+import GoogleIcon from '@mui/icons-material/Google'
+import InstagramIcon from '@mui/icons-material/Instagram'
+import LinkedInIcon from '@mui/icons-material/LinkedIn'
+import GitHubIcon from '@mui/icons-material/GitHub'
+import YouTubeIcon from '@mui/icons-material/YouTube'
 
-function Copyright(props) {
+function Copyright() {
     return (
-        <Typography variant="body2" color="text.secondary" mt={1}>
+        <Typography variant="body2" mt={1}>
             {'Copyright © '}
-            <Link href="https://mui.com/" sx={{ textDecoration: 'none' }}>
-                {props.app_name}&nbsp;
+            <Link
+                href="https://mui.com/"
+                sx={{ textDecoration: 'none' }}
+                className="text-light"
+            >
+                {import.meta.env.VITE_APP_TITLE || 'ECOM App'}.com&nbsp;
             </Link>
             {new Date().getFullYear()}
         </Typography>
@@ -25,76 +28,75 @@ function Copyright(props) {
 export default function Footer() {
     return (
         <div className="container-fluid mt-2 p-0">
-            <Box
-                className="footerBox"
-                sx={{
-                    display: 'flex',
-                    justifyContent: 'space-between',
-
-                    width: '100%',
-                    borderTop: '1px solid',
-                    borderColor: 'divider',
-                }}
-            >
-                <div>
-                    <Link
-                        color="text.secondary"
-                        sx={{ textDecoration: 'none' }}
-                        href="#"
-                    >
-                        Privacy Policy
-                    </Link>
-                    <Typography display="inline" sx={{ mx: 0.5, opacity: 0.5 }}>
-                        &nbsp;•&nbsp;
-                    </Typography>
-                    <Link
-                        color="text.secondary"
-                        sx={{ textDecoration: 'none' }}
-                        href="#"
-                    >
-                        Terms of Service
-                    </Link>
-                    <Copyright app_name={import.meta.env.VITE_APP_NAME} />
+            <div className="bg-dark text-white">
+                <div className="container p-3 pb-1">
+                    <section className="d-flex justify-content-center mb-3">
+                        <p
+                            color="light"
+                            className="btn-outline-dark m-1"
+                            href="#!"
+                            role="button"
+                        >
+                            <GoogleIcon />
+                        </p>
+                        <p
+                            color="light"
+                            className="btn-outline-dark m-1"
+                            href="#!"
+                            role="button"
+                        >
+                            <FacebookIcon />
+                        </p>
+                        <p
+                            color="light"
+                            className="btn-outline-dark m-1"
+                            href="#!"
+                            role="button"
+                        >
+                            <InstagramIcon />
+                        </p>
+                        <p
+                            color="light"
+                            className="btn-outline-dark m-1"
+                            href="#!"
+                            role="button"
+                        >
+                            <YouTubeIcon />
+                        </p>
+                        <p
+                            color="light"
+                            className="btn-outline-dark m-1"
+                            href="#!"
+                            role="button"
+                        >
+                            <LinkedInIcon />
+                        </p>
+                        <p
+                            color="light"
+                            className="btn-outline-dark m-1"
+                            href="#!"
+                            role="button"
+                        >
+                            <GitHubIcon />
+                        </p>
+                        <p
+                            color="light"
+                            className="btn-outline-dark m-1"
+                            href="#!"
+                            role="button"
+                        >
+                            <XIcon />
+                        </p>
+                    </section>
                 </div>
-                <Stack
-                    direction="row"
-                    justifyContent="left"
-                    spacing={1}
-                    useFlexGap
-                    sx={{
-                        color: 'text.secondary',
-                    }}
+
+                <div
+                    className="text-center p-3"
+                    style={{ backgroundColor: 'rgba(0, 0, 0, 0.2)' }}
                 >
-                    <IconButton
-                        color="inherit"
-                        href="https://github.com/mui"
-                        aria-label="GitHub"
-                        sx={{ alignSelf: 'center' }}
-                    >
-                        <FacebookIcon />
-                    </IconButton>
-                    <IconButton
-                        color="inherit"
-                        href="https://twitter.com/MaterialUI"
-                        aria-label="X"
-                        sx={{ alignSelf: 'center' }}
-                    >
-                        <TwitterIcon />
-                    </IconButton>
-                    <IconButton
-                        color="inherit"
-                        href="https://www.linkedin.com/company/mui/"
-                        aria-label="LinkedIn"
-                        sx={{ alignSelf: 'center' }}
-                    >
-                        <LinkedInIcon />
-                    </IconButton>
-                </Stack>
-            </Box>
+                    <Copyright />
+                </div>
+            </div>
         </div>
     )
-}
-
-Copyright.propTypes = {
-    app_name: PropTypes.string,
 }
