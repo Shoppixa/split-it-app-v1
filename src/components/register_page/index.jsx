@@ -5,12 +5,14 @@ import GoogleIcon from '@mui/icons-material/Google.js'
 import FacebookIcon from '@mui/icons-material/Facebook.js'
 import GitHubIcon from '@mui/icons-material/GitHub.js'
 
-const LoginForm = () => {
+const RegisterForm = () => {
     return (
         <div className="container">
             <div className="row justify-content-center">
                 <div className="col-md-6 justify-content-center">
-                    <h3 className="text-center fw-bolder mt-2 mb-2">Login </h3>
+                    <h3 className="text-center fw-bolder mt-2 mb-2">
+                        Register{' '}
+                    </h3>
                     <h6 className="text-center">
                         Experience the freedom of collaborative expense
                         management.
@@ -19,6 +21,17 @@ const LoginForm = () => {
                         className="row justify-content-center"
                         style={{ marginTop: '30px' }}
                     >
+                        <div className="row justify-content-center">
+                            <TextField
+                                className="my-2"
+                                variant="outlined"
+                                placeholder="Name"
+                                label="Name"
+                                id="name"
+                                type="text"
+                                style={{ maxWidth: '300px' }}
+                            />
+                        </div>
                         <div className="row justify-content-center">
                             <TextField
                                 className="my-2"
@@ -46,17 +59,17 @@ const LoginForm = () => {
                             variant="contained"
                             type="submit"
                             className="my-4 btn-outline-primary"
-                            style={{ maxWidth: '25%' }}
+                            style={{ 'max-width': '25%' }}
                         >
-                            Sign in
+                            Sign up
                         </Button>
                     </div>
 
                     <div className="text-center my-3">
                         <p>
-                            Not a member? <Link to="/register">Register</Link>
+                            Already a member? <Link to="/login">Login</Link>
                         </p>
-                        <p>or sign in with:</p>
+                        <p>or sign up with:</p>
 
                         <Button
                             className="m-1"
@@ -96,4 +109,4 @@ const LoginForm = () => {
         </div>
     )
 }
-export default LoginForm
+export default RegisterForm
