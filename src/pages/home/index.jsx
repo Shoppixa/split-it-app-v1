@@ -14,7 +14,7 @@ const Homepage = () => {
                         We organize your bills, so you can chill.
                     </p>
                     <div className="d-flex justify-content-center">
-                        <Link to="/register">
+                        <Link to="/dashboard">
                             <Button variant="contained">Get Started</Button>
                         </Link>
                     </div>
