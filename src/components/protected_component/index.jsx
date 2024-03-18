@@ -2,7 +2,7 @@ import { Navigate } from 'react-router-dom'
 import * as React from 'react'
 
 // ProtectedRoute component
-const ProtectedComponent = ({ element, ...rest }) => {
+const ProtectedRoute = ({ element, ...rest }) => {
     const isAuthenticated = JSON.parse(localStorage.getItem('isAuthenticated'))
 
     return (
@@ -12,4 +12,4 @@ const ProtectedComponent = ({ element, ...rest }) => {
     )
 }
 
-export default ProtectedComponent
+export default ProtectedRoute
