@@ -4,7 +4,7 @@ import './style.css'
 const SideNavbar = () => {
     return (
         <div>
-            <ul className="list-group side-navbar">
+            <ul className="list-group">
                 <p className="shadow py-1">
                     <Link
                         to="/dashboard"

@@ -1,6 +1,6 @@
 @media screen and (max-width: 600px) {
     .side-navbar {
-        max-height: 50%;
+        max-height: 25%;
         overflow: scroll;
     }
 }
