@@ -1,0 +1,25 @@
+.appBar {
+    box-shadow: 'none';
+    background-color: transparent;
+    background-image: none;
+}
+
+.toolbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.box {
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+    margin-left: -18px;
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.logoLink {
+    display: flex;
+    align-items: center;
+}

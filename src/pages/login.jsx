@@ -1,7 +1,6 @@
-import logo from '../../assets/brand/brand-big.png'
-import RegisterForm from '../../components/register_page/index.jsx'
-
-const RegisterPage = () => {
+import logo from '../assets/brand/brand-big.png'
+import LoginForm from '../components/loginpage/index.jsx'
+const LoginPage = () => {
     return (
         <div className="container">
             <div className="text-center my-2">
@@ -12,8 +11,8 @@ const RegisterPage = () => {
                     style={{ maxHeight: '200px' }}
                 />
             </div>
-            <RegisterForm />
+            <LoginForm />
         </div>
     )
 }
-export default RegisterPage
+export default LoginPage

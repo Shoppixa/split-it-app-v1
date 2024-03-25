@@ -120,7 +120,7 @@ const LoginModal = (props) => {
 
                             <div className="d-flex flex-row align-items-center justify-content-center pb-4 my-2">
                                 <p className="mb-0 text-dark">
-                                    Don't have an account?
+                                    Don&apos;t have an account?
                                 </p>
                                 <Link to="/register">
                                     <Button variant="outlined" className="mx-2">

@@ -1,4 +1,4 @@
-import logo from '../../assets/brand/brand-big.png'
+import logo from '../assets/brand/brand-big.png'
 import { Link } from 'react-router-dom'
 import Button from '@mui/material/Button'
 
@@ -8,7 +8,7 @@ const Homepage = () => {
             <div className="row d-flex justify-content-center align-items-center my-5">
                 <div className="col-md-6 justify-content-center my-5">
                     <h1 className="text-center fw-bolder">
-                        Let's split the bills not the friendships.
+                        Let&rsquo;s split the bills not the friendships.
                     </h1>
                     <p className="text-center">
                         We organize your bills, so you can chill.
