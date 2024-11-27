@@ -25,7 +25,10 @@ const GroupDetails = () => {
 
             <div className="list-group shadow-5-strong my-2">
                 {expenses.map((expense) => (
-                    <div className="list-group-item border-0 d-flex justify-content-between align-items-center shadow mb-2">
+                    <div
+                        key={expense.id}
+                        className="list-group-item border-0 d-flex justify-content-between align-items-center shadow mb-2"
+                    >
                         <div className="d-flex align-items-center">
                             <img
                                 src="https://mdbootstrap.com/img/new/avatars/15.jpg"
