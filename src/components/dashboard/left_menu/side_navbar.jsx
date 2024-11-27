@@ -13,6 +13,14 @@ const SideNavbar = () => {
                         Dashboard
                     </Link>
                 </p>
+                <p className="shadow py-1">
+                    <Link
+                        to="/groups"
+                        className="text-dark text-decoration-none"
+                    >
+                        My Groups
+                    </Link>
+                </p>
                 <p className="shadow py-1">My Expenses</p>
                 <p className="shadow py-1">Previous Month Records</p>
                 <p className="shadow py-1">My Reports</p>
