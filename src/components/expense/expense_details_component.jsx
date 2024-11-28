@@ -1,20 +1,50 @@
-import React, { useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
+import React, { useState } from 'react'
+import DeleteIcon from '@mui/icons-material/Delete.js'
 import Button from '@mui/material/Button'
-import DeleteIcon from '@mui/icons-material/Delete'
-import { Alert } from '@mui/material'
+import PersonAddIcon from '@mui/icons-material/PersonAdd'
 import Select from 'react-select'
-import PersonAddIcon from '@mui/icons-material/PersonAdd.js'
+import { Alert } from '@mui/material'
 import getRandomString from '../../utilities/get_random_string.jsx'
 
-const GroupDetails = () => {
+const ExpenseDetailsComponent = () => {
     let expenses = [
-        { id: 1, name: 'Test Expense 1', amount: 100 },
-        { id: 2, name: 'Test Expense 2', amount: -200 },
-        { id: 3, name: 'Test Expense 3', amount: 400 },
-        { id: 4, name: 'Test Expense 4', amount: -7100 },
-        { id: 5, name: 'Test Expense 5', amount: 3100 },
-        { id: 6, name: 'Test Expense 6', amount: -9100 },
+        {
+            id: 1,
+            name: 'Test Expense 1',
+            amount: 100,
+            participants: ['Test User 1', 'Test user 2', 'Test User 3'],
+        },
+        {
+            id: 2,
+            name: 'Test Expense 2',
+            amount: -200,
+            participants: ['Test User 1', 'Test user 2', 'Test User 3'],
+        },
+        {
+            id: 3,
+            name: 'Test Expense 3',
+            amount: 400,
+            participants: ['Test User 1', 'Test user 2', 'Test User 3'],
+        },
+        {
+            id: 4,
+            name: 'Test Expense 4',
+            amount: -7100,
+            participants: ['Test User 1', 'Test user 2', 'Test User 3'],
+        },
+        {
+            id: 5,
+            name: 'Test Expense 5',
+            amount: 3100,
+            participants: ['Test User 1', 'Test user 2', 'Test User 3'],
+        },
+        {
+            id: 6,
+            name: 'Test Expense 6',
+            amount: -9100,
+            participants: ['Test User 1', 'Test user 2', 'Test User 3'],
+        },
     ]
     const options = [
         { value: 'Test User 99', label: 'Test User 99' },
@@ -22,6 +52,7 @@ const GroupDetails = () => {
         { value: 'Test User 97', label: 'Test User 97' },
         { value: 'Test User 98', label: 'Test User 98' },
     ]
+    let { id } = useParams()
     const [isVisibleUserSelect, setIsVisibleUserSelect] = useState(false) // Default: Hidden
     const [isVisibleAlert, setIsVisibleAlert] = useState(false) // Default: Hidden
     const [isVisibleCloseButton, setIsVisibleCloseButton] = useState(false) // Default: Hidden
@@ -42,18 +73,19 @@ const GroupDetails = () => {
         setIsVisibleUserSelect(false)
         setIsVisibleCloseButton(false) // Show the component
     }
+
     return (
         <div>
             <h6 className="p-2 my-3 shadow text-center fw-bolder">
                 <Link to="/groups" className="text-decoration-none text-dark">
-                    Test Group 1
+                    {expenses[id - 1].name}
                 </Link>
             </h6>
 
             <div className="list-group shadow-5-strong my-2">
-                {expenses.map((expense) => (
+                {expenses[id - 1].participants.map((participant) => (
                     <div
-                        key={expense.id}
+                        key={id}
                         className="list-group-item border-0 d-flex justify-content-between align-items-center shadow mb-2"
                     >
                         <div className="d-flex align-items-center">
@@ -65,39 +97,16 @@ const GroupDetails = () => {
                             />
                             <div className="ms-3">
                                 <Link
-                                    to={`/expense/${expense.id}`}
-                                    className="text-decoration-none text-dark mx-2"
+                                    to={`/group/${participant}`}
+                                    className="mb-1 text-decoration-none text-dark"
                                 >
-                                    {expense.name}
+                                    {participant}
                                 </Link>
                             </div>
                         </div>
-                        <div>
-                            {expense.amount > 0 ? (
-                                <Button
-                                    className="bg-success text-light"
-                                    style={{ cursor: 'text' }}
-                                >
-                                    {expense.amount}
-                                </Button>
-                            ) : (
-                                <Button
-                                    className="bg-danger text-light"
-                                    style={{ cursor: 'text' }}
-                                >
-                                    {expense.amount}
-                                </Button>
-                            )}
-                            <Link
-                                to={`/expense/${expense.id}`}
-                                className="text-decoration-none mx-2"
-                            >
-                                View
-                            </Link>
-                            <Button className="bg-danger text-light mx-2">
-                                <DeleteIcon />
-                            </Button>
-                        </div>
+                        <Button className="bg-danger text-light mx-2">
+                            <DeleteIcon />
+                        </Button>
                     </div>
                 ))}
             </div>
@@ -140,7 +149,7 @@ const GroupDetails = () => {
                     style={{ maxWidth: '250px' }}
                     onClick={handleAddUserButtonClick}
                 >
-                    <PersonAddIcon className="mx-2" /> Add Member
+                    <PersonAddIcon className="mx-2" /> Add Participant
                 </Button>
                 {isVisibleCloseButton && (
                     <Button
@@ -155,4 +164,4 @@ const GroupDetails = () => {
         </div>
     )
 }
-export default GroupDetails
+export default ExpenseDetailsComponent

@@ -34,7 +34,12 @@ const GroupList = () => {
                                 className="rounded-circle ms-0"
                             />
                             <div className="ms-3">
-                                <p className="mb-1">{group.name}</p>
+                                <Link
+                                    to={`/group/${group.id}`}
+                                    className="mb-1 text-decoration-none text-dark"
+                                >
+                                    {group.name}
+                                </Link>
                             </div>
                         </div>
 

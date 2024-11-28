@@ -10,6 +10,7 @@ import LoginPage from './pages/login/index.jsx'
 import RegisterPage from './pages/register/index.jsx'
 import Groups from './pages/groups/groups.jsx'
 import Group from './pages/groups/group.jsx'
+import ExpenseDetails from './pages/expense/expense_details.jsx'
 
 function App() {
     useEffect(() => {
@@ -25,6 +26,10 @@ function App() {
                         <Route path="/dashboard" element={<UserDashboard />} />
                         <Route path="/groups" element={<Groups />} />
                         <Route path="/group/:id" element={<Group />} />
+                        <Route
+                            path="/expense/:id"
+                            element={<ExpenseDetails />}
+                        />
                     </Route>
 
                     <Route path="/login" element={<LoginPage />} />
