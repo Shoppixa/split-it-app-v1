@@ -1,6 +1,6 @@
-import GroupChart from './group_chart.jsx'
-import MyExpenseCategoryChart from './expense_category_chart.jsx'
-import ExpenseChart from './expense_chart.jsx'
+// import GroupChart from './group_chart.jsx'
+// import MyExpenseCategoryChart from './expense_category_chart.jsx'
+// import ExpenseChart from './expense_chart.jsx'
 
 const DashboardMainContent = () => {
     return (
@@ -10,18 +10,18 @@ const DashboardMainContent = () => {
             </h4>
             <div className="row p-2 justify-content-center">
                 <div className="col-md-6 shadow p-2 my-2 justify-content-center">
-                    <GroupChart />
+                    {/*<GroupChart />*/}
                 </div>
                 <div className="col-md-6 shadow p-2 my-2 justify-content-center">
-                    <GroupChart />
+                    {/*<GroupChart />*/}
                 </div>
             </div>
             <div className="row p-2 justify-content-center">
                 <div className="col-md-6 shadow p-2 my-2 justify-content-center">
-                    <MyExpenseCategoryChart />
+                    {/*<MyExpenseCategoryChart />*/}
                 </div>
                 <div className="col-md-6 shadow p-2 my-2 justify-content-center">
-                    <ExpenseChart />
+                    {/*<ExpenseChart />*/}
                 </div>
             </div>
             {/*<h4 className="text-center mt-5 mb-3 shadow-5-strong p-2 fw-bolder">Latest Transactions</h4>*/}
