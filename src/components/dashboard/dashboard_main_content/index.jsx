@@ -1,4 +1,3 @@
-import React from 'react'
 import GroupChart from './group_chart.jsx'
 import MyExpenseCategoryChart from './expense_category_chart.jsx'
 import ExpenseChart from './expense_chart.jsx'

@@ -1,4 +1,3 @@
-import React from 'react'
 import LeftMenu from '../../components/dashboard/left_menu/index.jsx'
 import RightMenu from '../../components/dashboard/right_menu/index.jsx'
 import ExpenseDetailsComponent from '../../components/expense/expense_details_component.jsx'
