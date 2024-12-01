@@ -8,9 +8,12 @@ import UserDashboard from './pages/dashboard/index.jsx'
 import ProtectedRoute from './components/protected_component/index.jsx'
 import LoginPage from './pages/login/index.jsx'
 import RegisterPage from './pages/register/index.jsx'
-import Groups from './pages/groups/groups.jsx'
 import Group from './pages/groups/group.jsx'
-import ExpenseDetails from './pages/expense/expense_details.jsx'
+import ExpenseDetails from './pages/expense/index.jsx'
+import Friends from './pages/friends/index.jsx'
+import Groups from './pages/groups/index.jsx'
+import MyExpenses from './pages/my_expenses/index.jsx'
+import Profile from './pages/profile/index.jsx'
 
 function App() {
     useEffect(() => {
@@ -24,7 +27,10 @@ function App() {
                     <Route path="/" element={<Homepage />} />
                     <Route element={<ProtectedRoute />}>
                         <Route path="/dashboard" element={<UserDashboard />} />
+                        <Route path="/profile" element={<Profile />} />
                         <Route path="/groups" element={<Groups />} />
+                        <Route path="/friends" element={<Friends />} />
+                        <Route path="/myexpenses" element={<MyExpenses />} />
                         <Route path="/group/:id" element={<Group />} />
                         <Route
                             path="/expense/:id"
