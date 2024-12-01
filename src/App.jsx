@@ -1,28 +1,46 @@
-import "./App.css";
-import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
-import Header from "./components/common/header/index.jsx";
-import Footer from "./components/common/footer/index.jsx";
-import Homepage from "./pages/home/index.jsx";
+import './App.css'
+import { Route, BrowserRouter as Router, Routes } from 'react-router-dom'
+import Header from './components/common/header/index.jsx'
+import Footer from './components/common/footer/index.jsx'
+import Homepage from './pages/home/index.jsx'
+import { useEffect } from 'react'
+import UserDashboard from './pages/dashboard/index.jsx'
+import ProtectedRoute from './components/protected_component/index.jsx'
+import LoginPage from './pages/login/index.jsx'
+import RegisterPage from './pages/register/index.jsx'
+import Groups from './pages/groups/groups.jsx'
+import Group from './pages/groups/group.jsx'
+import ExpenseDetails from './pages/expense/expense_details.jsx'
 
 function App() {
-  return (
-    <Router>
-      <div className="App bg-primary bg-opacity-10">
-        <Header />
-        <Routes>
-          <Route path="/" element={<Homepage />} />
-          {/*                     <Route path="/dashboard" element={<Dashboard/>}/> */}
-          {/*<Route path="/edit-profile" element={<EditProfile/>} />*/}
-          {/*                     <Route path="/groups" element={<Dashboard/>}/> */}
-          {/*                     <Route path="/friends" element={<Dashboard/>}/> */}
-          {/*                     <Route path="/login" element={<Loginpage/>}/> */}
-          {/*                     <Route path="/register" element={<RegisterPage/>}/> */}
-          {/*<Route path="*" element={<PageNotFound/>} />*/}
-        </Routes>
-        <Footer />
-      </div>
-    </Router>
-  );
+    useEffect(() => {
+        document.title = import.meta.env.VITE_APP_TITLE || 'Splitzy'
+    }, [])
+    return (
+        <Router>
+            <div className="App">
+                <Header />
+                <Routes>
+                    <Route path="/" element={<Homepage />} />
+                    <Route element={<ProtectedRoute />}>
+                        <Route path="/dashboard" element={<UserDashboard />} />
+                        <Route path="/groups" element={<Groups />} />
+                        <Route path="/group/:id" element={<Group />} />
+                        <Route
+                            path="/expense/:id"
+                            element={<ExpenseDetails />}
+                        />
+                    </Route>
+
+                    <Route path="/login" element={<LoginPage />} />
+                    {/*<Route path="/edit-profile" element={<EditProfile/>} />*/}
+                    <Route path="/register" element={<RegisterPage />} />
+                    {/*<Route path="*" element={<PageNotFound/>} />*/}
+                </Routes>
+                <Footer />
+            </div>
+        </Router>
+    )
 }
 
-export default App;
+export default App
