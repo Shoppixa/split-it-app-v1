@@ -1,15 +1,11 @@
-import { Navigate } from 'react-router-dom'
+import { Navigate, Outlet } from 'react-router-dom'
 import * as React from 'react'
 
 // ProtectedRoute component
-const ProtectedComponent = ({ element, ...rest }) => {
+const ProtectedRoute = () => {
     const isAuthenticated = JSON.parse(localStorage.getItem('isAuthenticated'))
 
-    return (
-        <>
-            {isAuthenticated ? <element {...rest} /> : <Navigate to="/login" />}
-        </>
-    )
+    return <>{isAuthenticated ? <Outlet /> : <Navigate to="/login" />}</>
 }
 
-export default ProtectedComponent
+export default ProtectedRoute

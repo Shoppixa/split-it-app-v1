@@ -1,8 +1,9 @@
+import { useParams } from 'react-router-dom'
 import LeftMenu from '../../components/dashboard/left_menu/index.jsx'
 import RightMenu from '../../components/dashboard/right_menu/index.jsx'
-import DashboardMainContent from '../../components/dashboard/dashboard_main_content/index.jsx'
+import GroupDetails from '../../components/groups/group_details.jsx'
 
-const UserDashboard = () => {
+const Group = () => {
     return (
         <div className="container-fluid">
             <div className="row justify-content-center text-center my-2">
@@ -10,7 +11,7 @@ const UserDashboard = () => {
                     <LeftMenu />
                 </div>
                 <div className="col-md-8">
-                    <DashboardMainContent />
+                    <GroupDetails />
                 </div>
                 <div className="col-md-2">
                     <RightMenu />
@@ -19,4 +20,4 @@ const UserDashboard = () => {
         </div>
     )
 }
-export default UserDashboard
+export default Group

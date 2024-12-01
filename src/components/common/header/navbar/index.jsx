@@ -24,14 +24,18 @@ const logoStyle = {
 function AppNavbar(props) {
     const is_logged_in = props.is_logged_in
     const logged_in_pages = [
-        'Dashboard',
-        'Profile',
-        'Groups',
-        'Features',
-        'Pricing',
-        'FAQ',
+        { url: 'dashboard', name: 'Dashboard' },
+        { url: 'profile', name: 'Profile' },
+        { url: 'groups', name: 'Groups' },
+        { url: 'features', name: 'Features' },
+        { url: 'pricing', name: 'Pricing' },
+        { url: 'faq', name: 'FAQ' },
     ]
-    const logged_out_pages = ['Features', 'Pricing', 'FAQ']
+    const logged_out_pages = [
+        { url: 'features', name: 'Features' },
+        { url: 'pricing', name: 'Pricing' },
+        { url: 'faq', name: 'FAQ' },
+    ]
     const pages = is_logged_in ? logged_in_pages : logged_out_pages
 
     const [open, setOpen] = React.useState(false)
@@ -101,7 +105,12 @@ function AppNavbar(props) {
                                             variant="body2"
                                             color="text.primary"
                                         >
-                                            {page}
+                                            <Link
+                                                to={page.url}
+                                                className="text-decoration-none text-dark"
+                                            >
+                                                {page.name}
+                                            </Link>
                                         </Typography>
                                     </MenuItem>
                                 ))}
