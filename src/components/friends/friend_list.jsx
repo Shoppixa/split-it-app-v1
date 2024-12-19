@@ -22,7 +22,10 @@ const FriendList = () => {
                         key={friend.value}
                         className="list-group-item border-0 d-flex justify-content-between align-items-center shadow mb-2"
                     >
-                        <div className="d-flex align-items-center">
+                        <Link
+                            to={`/user/${friend.value}`}
+                            className="d-flex align-items-center text-decoration-none text-dark"
+                        >
                             <img
                                 src="https://mdbootstrap.com/img/new/avatars/8.jpg"
                                 alt=""
@@ -32,7 +35,7 @@ const FriendList = () => {
                             <div className="ms-3">
                                 <p className="mb-1">{friend.label}</p>
                             </div>
-                        </div>
+                        </Link>
                         <Button className="bg-danger text-light mx-2">
                             <DeleteIcon /> Remove Friend
                         </Button>

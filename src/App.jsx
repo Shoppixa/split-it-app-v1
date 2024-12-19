@@ -14,6 +14,7 @@ import Friends from './pages/friends/index.jsx'
 import Groups from './pages/groups/index.jsx'
 import MyExpenses from './pages/my_expenses/index.jsx'
 import Profile from './pages/profile/index.jsx'
+import UserProfile from './pages/user_profile/index.jsx'
 
 function App() {
     useEffect(() => {
@@ -32,6 +33,7 @@ function App() {
                         <Route path="/friends" element={<Friends />} />
                         <Route path="/myexpenses" element={<MyExpenses />} />
                         <Route path="/group/:id" element={<Group />} />
+                        <Route path="/user/:id" element={<UserProfile />} />
                         <Route
                             path="/expense/:id"
                             element={<ExpenseDetails />}
