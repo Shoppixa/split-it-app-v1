@@ -26,6 +26,7 @@ function AppNavbar(props) {
     const logged_in_pages = [
         { url: 'dashboard', name: 'Dashboard' },
         { url: 'profile', name: 'Profile' },
+        { url: 'friends', name: 'Friends' },
         { url: 'groups', name: 'Groups' },
         { url: 'features', name: 'Features' },
         { url: 'pricing', name: 'Pricing' },
@@ -54,6 +55,7 @@ function AppNavbar(props) {
         <>
             <div>
                 <AppBar
+                    className="border border-"
                     position="sticky"
                     sx={{
                         boxShadow: 0,

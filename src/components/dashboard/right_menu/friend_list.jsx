@@ -11,7 +11,10 @@ const FriendList = () => {
 
             <div className="list-group shadow-5-strong my-2">
                 <div className="list-group-item border-0 d-flex justify-content-between align-items-center shadow mb-2">
-                    <div className="d-flex align-items-center">
+                    <Link
+                        to={`/user/johndoe`}
+                        className="d-flex align-items-center text-decoration-none text-dark"
+                    >
                         <img
                             src="https://mdbootstrap.com/img/new/avatars/8.jpg"
                             alt=""
@@ -21,10 +24,13 @@ const FriendList = () => {
                         <div className="ms-3">
                             <p className="mb-1">John Doe</p>
                         </div>
-                    </div>
+                    </Link>
                 </div>
                 <div className="list-group-item border-0 d-flex justify-content-between align-items-center shadow mb-2">
-                    <div className="d-flex align-items-center">
+                    <Link
+                        to={`/user/johndoe`}
+                        className="d-flex align-items-center text-decoration-none text-dark"
+                    >
                         <img
                             src="https://mdbootstrap.com/img/new/avatars/8.jpg"
                             alt=""
@@ -34,10 +40,13 @@ const FriendList = () => {
                         <div className="ms-3">
                             <p className="mb-1">John Doe</p>
                         </div>
-                    </div>
+                    </Link>
                 </div>
                 <div className="list-group-item border-0 d-flex justify-content-between align-items-center shadow mb-2">
-                    <div className="d-flex align-items-center">
+                    <Link
+                        to={`/user/johndoe`}
+                        className="d-flex align-items-center text-decoration-none text-dark"
+                    >
                         <img
                             src="https://mdbootstrap.com/img/new/avatars/8.jpg"
                             alt=""
@@ -47,10 +56,13 @@ const FriendList = () => {
                         <div className="ms-3">
                             <p className="mb-1">John Doe</p>
                         </div>
-                    </div>
+                    </Link>
                 </div>
                 <div className="list-group-item border-0 d-flex justify-content-between align-items-center shadow mb-2">
-                    <div className="d-flex align-items-center">
+                    <Link
+                        to={`/user/johndoe`}
+                        className="d-flex align-items-center text-decoration-none text-dark"
+                    >
                         <img
                             src="https://mdbootstrap.com/img/new/avatars/8.jpg"
                             alt=""
@@ -60,10 +72,13 @@ const FriendList = () => {
                         <div className="ms-3">
                             <p className="mb-1">John Doe</p>
                         </div>
-                    </div>
+                    </Link>
                 </div>
                 <div className="list-group-item border-0 d-flex justify-content-between align-items-center shadow mb-2">
-                    <div className="d-flex align-items-center">
+                    <Link
+                        to={`/user/johndoe`}
+                        className="d-flex align-items-center text-decoration-none text-dark"
+                    >
                         <img
                             src="https://mdbootstrap.com/img/new/avatars/8.jpg"
                             alt=""
@@ -73,7 +88,7 @@ const FriendList = () => {
                         <div className="ms-3">
                             <p className="mb-1">John Doe</p>
                         </div>
-                    </div>
+                    </Link>
                 </div>
             </div>
         </div>
