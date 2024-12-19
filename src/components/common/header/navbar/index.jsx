@@ -55,6 +55,7 @@ function AppNavbar(props) {
         <>
             <div>
                 <AppBar
+                    className="border border-"
                     position="sticky"
                     sx={{
                         boxShadow: 0,

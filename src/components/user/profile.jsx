@@ -1,11 +1,8 @@
-import { Link } from 'react-router-dom'
 import Button from '@mui/material/Button'
 import { Input, TextField } from '@mui/material'
 import CloudUploadIcon from '@mui/icons-material/CloudUpload'
-import { Label } from '@mui/icons-material'
 import { DatePicker, LocalizationProvider } from '@mui/x-date-pickers'
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
-import { DemoContainer } from '@mui/x-date-pickers/internals/demo/index.js'
 import DeleteIcon from '@mui/icons-material/Delete.js'
 
 const ProfileDetails = () => {
@@ -18,9 +15,7 @@ const ProfileDetails = () => {
     return (
         <div>
             <h6 className="p-2 my-3 shadow text-center fw-bolder rounded-4">
-                <Link to="/groups" className="text-decoration-none text-dark">
-                    My Profile
-                </Link>
+                <div className="text-decoration-none text-dark">My Profile</div>
             </h6>
 
             <div className="d-flex justify-content-center align-items-center p-2 shadow shadow-5 rounded-4">

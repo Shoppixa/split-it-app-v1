@@ -1,5 +1,4 @@
 import { Link, useParams } from 'react-router-dom'
-import React, { useState } from 'react'
 import DeleteIcon from '@mui/icons-material/Delete.js'
 import Button from '@mui/material/Button'
 import PersonAddIcon from '@mui/icons-material/PersonAdd'
@@ -97,7 +96,7 @@ const ExpenseDetailsComponent = () => {
                             />
                             <div className="ms-3">
                                 <Link
-                                    to={`/group/${participant}`}
+                                    to={`/user/${participant}`}
                                     className="mb-1 text-decoration-none text-dark"
                                 >
                                     {participant}
