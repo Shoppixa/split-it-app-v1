@@ -15,39 +15,50 @@ import Groups from './pages/groups/index.jsx'
 import MyExpenses from './pages/my_expenses/index.jsx'
 import Profile from './pages/profile/index.jsx'
 import UserProfile from './pages/user_profile/index.jsx'
+import VerifyOTP from './pages/verify-otp/index.jsx'
+import { store } from './app/store.js'
+import { Provider } from 'react-redux'
 
 function App() {
     useEffect(() => {
         document.title = import.meta.env.VITE_APP_TITLE || 'Splitzy'
     }, [])
     return (
-        <Router>
-            <div className="App">
-                <Header />
-                <Routes>
-                    <Route path="/" element={<Homepage />} />
-                    <Route element={<ProtectedRoute />}>
-                        <Route path="/dashboard" element={<UserDashboard />} />
-                        <Route path="/profile" element={<Profile />} />
-                        <Route path="/groups" element={<Groups />} />
-                        <Route path="/friends" element={<Friends />} />
-                        <Route path="/myexpenses" element={<MyExpenses />} />
-                        <Route path="/group/:id" element={<Group />} />
-                        <Route path="/user/:id" element={<UserProfile />} />
-                        <Route
-                            path="/expense/:id"
-                            element={<ExpenseDetails />}
-                        />
-                    </Route>
-
-                    <Route path="/login" element={<LoginPage />} />
-                    {/*<Route path="/edit-profile" element={<EditProfile/>} />*/}
-                    <Route path="/register" element={<RegisterPage />} />
-                    {/*<Route path="*" element={<PageNotFound/>} />*/}
-                </Routes>
-                <Footer />
-            </div>
-        </Router>
+        <Provider store={store}>
+            <Router>
+                <div className="App">
+                    <Header />
+                    <Routes>
+                        <Route path="/" element={<Homepage />} />
+                        <Route element={<ProtectedRoute />}>
+                            <Route
+                                path="/dashboard"
+                                element={<UserDashboard />}
+                            />
+                            <Route path="/profile" element={<Profile />} />
+                            <Route path="/groups" element={<Groups />} />
+                            <Route path="/friends" element={<Friends />} />
+                            <Route
+                                path="/myexpenses"
+                                element={<MyExpenses />}
+                            />
+                            <Route path="/group/:id" element={<Group />} />
+                            <Route path="/user/:id" element={<UserProfile />} />
+                            <Route
+                                path="/expense/:id"
+                                element={<ExpenseDetails />}
+                            />
+                        </Route>
+                        <Route path="/verify-otp" element={<VerifyOTP />} />
+                        <Route path="/login" element={<LoginPage />} />
+                        {/*<Route path="/edit-profile" element={<EditProfile/>} />*/}
+                        <Route path="/register" element={<RegisterPage />} />
+                        {/*<Route path="*" element={<PageNotFound/>} />*/}
+                    </Routes>
+                    <Footer />
+                </div>
+            </Router>
+        </Provider>
     )
 }
 

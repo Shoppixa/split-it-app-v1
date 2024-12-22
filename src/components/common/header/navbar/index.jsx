@@ -9,20 +9,20 @@ import Typography from '@mui/material/Typography'
 import MenuItem from '@mui/material/MenuItem'
 import Drawer from '@mui/material/Drawer'
 import MenuIcon from '@mui/icons-material/Menu'
-import PropTypes from 'prop-types'
 import ReceiptLongIcon from '@mui/icons-material/ReceiptLong'
 import './style.css'
 import Box from '@mui/material/Box'
 import RegisterModal from '../../../register_modal/index.jsx'
 import { Link } from 'react-router-dom'
+import { useSelector } from 'react-redux'
 
 const logoStyle = {
     height: 'auto',
     cursor: 'pointer',
 }
 
-function AppNavbar(props) {
-    const is_logged_in = props.is_logged_in
+function AppNavbar() {
+    const { isLoggedIn } = useSelector((state) => state.auth)
     const logged_in_pages = [
         { url: 'dashboard', name: 'Dashboard' },
         { url: 'profile', name: 'Profile' },
@@ -37,7 +37,7 @@ function AppNavbar(props) {
         { url: 'pricing', name: 'Pricing' },
         { url: 'faq', name: 'FAQ' },
     ]
-    const pages = is_logged_in ? logged_in_pages : logged_out_pages
+    const pages = isLoggedIn ? logged_in_pages : logged_out_pages
 
     const [open, setOpen] = React.useState(false)
     const [openLoginModal, setOpenLoginModal] = React.useState(false)
@@ -126,7 +126,7 @@ function AppNavbar(props) {
                                 alignItems: 'center',
                             }}
                         >
-                            {is_logged_in ? (
+                            {isLoggedIn ? (
                                 <>
                                     <Button
                                         color="primary"
@@ -200,7 +200,7 @@ function AppNavbar(props) {
                                         </MenuItem>
                                     ))}
                                     <Divider />
-                                    {is_logged_in ? (
+                                    {isLoggedIn ? (
                                         <>
                                             <MenuItem>
                                                 <Button
@@ -265,7 +265,3 @@ function AppNavbar(props) {
 }
 
 export default AppNavbar
-
-AppNavbar.propTypes = {
-    is_logged_in: PropTypes.bool,
-}
