@@ -4,7 +4,7 @@ import Button from '@mui/material/Button'
 import { Alert, TextField } from '@mui/material'
 import Select from 'react-select'
 import PersonAddIcon from '@mui/icons-material/PersonAdd.js'
-import getRandomString from '../../utilities/get_random_string.jsx'
+import getRandomString from '../../utils/get_random_string.jsx'
 
 const GroupList = () => {
     let groups = [

@@ -1,11 +1,12 @@
 import { Navigate, Outlet } from 'react-router-dom'
 import * as React from 'react'
+import { useSelector } from 'react-redux'
 
 // ProtectedRoute component
-const ProtectedRoute = () => {
-    const isAuthenticated = JSON.parse(localStorage.getItem('isAuthenticated'))
+const ProtectedRoute = ({ children }) => {
+    const { isLoggedIn } = useSelector((state) => state.user)
 
-    return <>{isAuthenticated ? <Outlet /> : <Navigate to="/login" />}</>
+    return <>{isLoggedIn ? children : <Navigate to="/login" />}</>
 }
 
 export default ProtectedRoute
