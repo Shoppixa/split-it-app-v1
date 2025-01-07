@@ -22,7 +22,7 @@ const logoStyle = {
 }
 
 function AppNavbar() {
-    const { isLoggedIn } = useSelector((state) => state.auth)
+    const { isLoggedIn } = useSelector((state) => state.user)
     const logged_in_pages = [
         { url: 'dashboard', name: 'Dashboard' },
         { url: 'profile', name: 'Profile' },

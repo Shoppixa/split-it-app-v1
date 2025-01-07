@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import { Alert } from '@mui/material'
 import PropTypes from 'prop-types'
-import { resetMessages } from '../../../features/auth/authSlice.js'
+import { resetMessages } from '../../../store/userSlice.js'
 
 const CustomMessage = ({ successMessage, errorMessage }) => {
     const dispatch = useDispatch()

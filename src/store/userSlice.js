@@ -1,9 +1,9 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
-import authService from './authService'
-import { cleanErrorMessage } from './helpers.js'
+import authService from '../utils/authService.js'
+import { cleanErrorMessage } from '../utils/helpers.js'
 
 export const registerUser = createAsyncThunk(
-    'auth/api/v2/create-users',
+    'registerUser',
     async (userData, thunkAPI) => {
         try {
             return await authService.register(userData)
@@ -15,7 +15,7 @@ export const registerUser = createAsyncThunk(
     }
 )
 export const verifyOtp = createAsyncThunk(
-    'auth/api/v2/verify-otp',
+    'verifyOtp',
     async (otpData, thunkAPI) => {
         try {
             return await authService.verifyOtp(otpData)
@@ -27,22 +27,24 @@ export const verifyOtp = createAsyncThunk(
     }
 )
 export const loginUser = createAsyncThunk(
-    'auth/api/v2/sign-in',
+    'login',
     authService.login
 )
 
-const authSlice = createSlice({
-    name: 'auth',
-    initialState: {
-        user_email: null,
-        token: null,
-        refresh_token: null,
-        status: 'idle',
-        successMessage: null,
-        errorMessage: null,
-        isLoading: false,
-        isLoggedIn: false,
-    },
+const initialValue = {
+    user_email: null,
+    token: null,
+    refresh_token: null,
+    status: 'idle',
+    successMessage: null,
+    errorMessage: null,
+    isLoading: false,
+    isLoggedIn: false,
+}
+
+const userSlice = createSlice({
+    name: 'user',
+    initialState: initialValue,
     reducers: {
         resetMessages: (state) => {
             state.successMessage = null
@@ -108,5 +110,5 @@ const authSlice = createSlice({
     },
 })
 
-export const { resetMessages, logout } = authSlice.actions
-export default authSlice.reducer
+export const { resetMessages, logout } = userSlice.actions
+export default userSlice.reducer

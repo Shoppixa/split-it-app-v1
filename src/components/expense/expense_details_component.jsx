@@ -4,7 +4,7 @@ import Button from '@mui/material/Button'
 import PersonAddIcon from '@mui/icons-material/PersonAdd'
 import Select from 'react-select'
 import { Alert } from '@mui/material'
-import getRandomString from '../../utilities/get_random_string.jsx'
+import getRandomString from '../../utils/get_random_string.jsx'
 
 const ExpenseDetailsComponent = () => {
     let expenses = [

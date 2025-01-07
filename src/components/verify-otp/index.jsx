@@ -4,12 +4,12 @@ import { TextField } from '@mui/material'
 import { useDispatch, useSelector } from 'react-redux'
 import Loader from '../common/loader/index.jsx'
 import Button from '@mui/material/Button'
-import { verifyOtp } from '../../features/auth/authSlice.js'
+import { verifyOtp } from '../../store/userSlice.js'
 import { useNavigate } from 'react-router-dom'
 
 const VerifyOTPForm = () => {
     const { errorMessage, isLoading, user_email, token } = useSelector(
-        (state) => state.auth
+        (state) => state.user
     )
     const [otp, setOtp] = useState(null)
     const dispatch = useDispatch()

@@ -30,8 +30,7 @@ const register = async (userData) => {
         fname: userData['name'].split(' ')[0],
         lname: userData['name'].split(' ')[1],
         email: userData['email'],
-        password1: userData['password'],
-        password2: userData['password'],
+        password: userData['password'],
     }
     try {
         const response = await axios.post(

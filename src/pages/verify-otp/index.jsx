@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom'
 import VerifyOTPForm from '../../components/verify-otp/index.jsx'
 
 const VerifyOTP = () => {
-    const { user_email } = useSelector((state) => state.auth)
+    const { user_email } = useSelector((state) => state.user)
     const navigate = useNavigate()
 
     useEffect(() => {

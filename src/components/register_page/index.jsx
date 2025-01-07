@@ -6,7 +6,7 @@ import FacebookIcon from '@mui/icons-material/Facebook.js'
 import GitHubIcon from '@mui/icons-material/GitHub.js'
 import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { registerUser } from '../../features/auth/authSlice.js'
+import { registerUser } from '../../store/userSlice.js'
 import CustomMessage from '../common/custom_message/index.jsx'
 import Loader from '../common/loader/index.jsx'
 
@@ -17,7 +17,7 @@ const RegisterForm = () => {
     const [password, setPassword] = useState('')
     const dispatch = useDispatch()
     const { successMessage, errorMessage, isLoading, user_email } = useSelector(
-        (state) => state.auth
+        (state) => state.user
     )
 
     const handleRegister = () => {
