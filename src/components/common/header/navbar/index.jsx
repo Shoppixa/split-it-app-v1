@@ -194,11 +194,12 @@ function AppNavbar() {
                                             flexGrow: 1,
                                         }}
                                     ></Box>
-                                    {pages.map((page) => (
-                                        <MenuItem key={pages.indexOf(page)}>
-                                            {page}
+                                    {pages.map((page, index) => (
+                                        <MenuItem key={index}>
+                                            {page.name}
                                         </MenuItem>
-                                    ))}
+                                    )
+                                    )}
                                     <Divider />
                                     {isLoggedIn ? (
                                         <>

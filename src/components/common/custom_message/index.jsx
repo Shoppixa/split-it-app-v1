@@ -4,28 +4,25 @@ import { Alert } from '@mui/material'
 import PropTypes from 'prop-types'
 import { resetMessages } from '../../../store/userSlice.js'
 
-const CustomMessage = ({ successMessage, errorMessage }) => {
+const CustomMessage = ({ message, statusCode }) => {
     const dispatch = useDispatch()
-
+    // const success_status_code_list = ['200', '201']
+    // const severity = success_status_code_list.includes(statusCode) ? 'success' : 'error';
+    
     useEffect(() => {
-        if (successMessage || errorMessage) {
+        if (message) {
             const timer = setTimeout(() => {
                 dispatch(resetMessages())
-            }, 30000)
+            }, 10000)
             return () => clearTimeout(timer) // Cleanup timer on unmount
         }
-    }, [successMessage, errorMessage, dispatch])
+    }, [message, dispatch])
 
     return (
         <div className="my-4">
-            {successMessage && (
-                <Alert variant="outlined" severity="success">
-                    {successMessage}
-                </Alert>
-            )}
-            {errorMessage && (
-                <Alert variant="outlined" severity="error">
-                    {errorMessage}
+            {message && (
+                <Alert variant="outlined" severity={'error'}>
+                    {message}
                 </Alert>
             )}
         </div>
@@ -33,14 +30,7 @@ const CustomMessage = ({ successMessage, errorMessage }) => {
 }
 
 CustomMessage.propTypes = {
-    successMessage: PropTypes.string, // Optional string prop
-    errorMessage: PropTypes.string, // Optional string prop
-}
-
-// Set default props (optional)
-CustomMessage.defaultProps = {
-    successMessage: null,
-    errorMessage: null,
+    message: PropTypes.string, // Optional string prop
 }
 
 export default CustomMessage
