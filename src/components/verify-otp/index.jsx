@@ -69,7 +69,7 @@ const VerifyOTPForm = () => {
                                     variant="contained"
                                     type="submit"
                                     className="my-4 btn-outline-primary"
-                                    style={{ 'max-width': '25%' }}
+                                    style={{ 'maxWidth': '25%' }}
                                     onClick={handleVerify}
                                     disabled={isLoading}
                                 >

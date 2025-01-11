@@ -61,7 +61,9 @@ export const loginUser = createAsyncThunk(
             })
             return {
                 message: response.data.message,
-                token: response.data.token, // Include token if login is successful
+                token: response.data.token?.access,
+                refresh: response.data.token?.refresh,
+                statusCode: response.status // Include token if login is successful
             }
         } catch (error) {
             const errorPayload = AxiosToastError(error);
@@ -105,6 +107,7 @@ const userSlice = createSlice({
             .addCase(registerUser.rejected, (state, action) => {
                 state.isLoading = false
                 state.message = action.payload?.message || 'Failed to register user'
+                state.statusCode = action.payload?.statusCode
             })
             .addCase(registerUser.fulfilled, (state, action) => {
                 state.user_email = action.payload.message
@@ -137,14 +140,22 @@ const userSlice = createSlice({
                     : null
                 state.statusCode = action.payload.statusCode
             })
+            .addCase(loginUser.pending, (state) => {
+                state.isLoading = true // Set loading state
+                state.message = null // Clear message
+            })
+            .addCase(loginUser.rejected, (state, action) => {
+                state.isLoading = false
+                state.message = action.payload?.message || 'Failed to register user'
+                state.statusCode = action.payload?.statusCode
+            })
             .addCase(loginUser.fulfilled, (state, action) => {
                 state.isLoading = false
                 state.isLoggedIn = true
                 state.token = action.payload.token || null
                 state.message = action.payload.message
-                state.message = cleanErrorMessage(
-                    action.payload.message
-                )
+                state.message = action.payload.message
+                state.statusCode = action.payload.statusCode
             })
     },
 })
