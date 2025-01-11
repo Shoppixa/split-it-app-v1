@@ -1,34 +1,73 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
-import authService from '../utils/authService.js'
+import SummaryApi from '../common/SummaryApi.js'
+import Axios from '../utils/Axios.js'
 import { cleanErrorMessage } from '../utils/helpers.js'
+import { AxiosToastError } from '../utils/AxiosToastError.js'
 
 export const registerUser = createAsyncThunk(
     'registerUser',
     async (userData, thunkAPI) => {
+        const payload = {
+            fname: userData['name'].split(' ')[0],
+            lname: userData['name'].split(' ')[1],
+            email: userData['email'],
+            password: userData['password'],
+        }
         try {
-            return await authService.register(userData)
+            const response = await Axios({
+                ...SummaryApi.register,
+                data: payload,
+            });
+            return { message: response.data.message, statusCode: response.status };
         } catch (error) {
-            return thunkAPI.rejectWithValue(
-                error.response?.data || error.message
-            )
+            const errorPayload = AxiosToastError(error);
+            return thunkAPI.rejectWithValue({ message: cleanErrorMessage(errorPayload.message), statusCode: error.status });
         }
     }
 )
 export const verifyOtp = createAsyncThunk(
     'verifyOtp',
-    async (otpData, thunkAPI) => {
+    async ({ user_email, otp }, thunkAPI) => {
         try {
-            return await authService.verifyOtp(otpData)
-        } catch (error) {
-            return thunkAPI.rejectWithValue(
-                error.response?.data || error.message
+            let otpData = {
+                email: user_email,
+                otp: otp,
+            }
+            const response = await Axios(
+                {
+                    ...SummaryApi.verify_otp,
+                    data: otpData
+                }
             )
+            return {
+                access_token: response.data.token?.access,
+                refresh: response.data.token?.refresh,
+                message: response.data.message,
+                statusCode: response.status
+            }
+        } catch (error) {
+            const errorPayload = AxiosToastError(error);
+            return thunkAPI.rejectWithValue({ message: cleanErrorMessage(errorPayload.message), statusCode: error.status });
         }
     }
 )
 export const loginUser = createAsyncThunk(
     'login',
-    authService.login
+    async (userData, thunkAPI) => {
+        try {
+            const response = await Axios({
+                ...SummaryApi.login,
+                data: userData,
+            })
+            return {
+                message: response.data.message,
+                token: response.data.token, // Include token if login is successful
+            }
+        } catch (error) {
+            const errorPayload = AxiosToastError(error);
+            return thunkAPI.rejectWithValue({ message: cleanErrorMessage(errorPayload.message), statusCode: error.status });
+        }
+    }
 )
 
 const initialValue = {
@@ -36,10 +75,10 @@ const initialValue = {
     token: null,
     refresh_token: null,
     status: 'idle',
-    successMessage: null,
-    errorMessage: null,
+    message: null,
     isLoading: false,
     isLoggedIn: false,
+    statusCode: '',
 }
 
 const userSlice = createSlice({
@@ -47,8 +86,7 @@ const userSlice = createSlice({
     initialState: initialValue,
     reducers: {
         resetMessages: (state) => {
-            state.successMessage = null
-            state.errorMessage = null
+            state.message = null
             state.isLoading = false
         },
         logout: (state) => {
@@ -62,49 +100,50 @@ const userSlice = createSlice({
         builder
             .addCase(registerUser.pending, (state) => {
                 state.isLoading = true // Set loading state
-                state.successMessage = null // Clear successMessage
-                state.errorMessage = null // Clear errorMessage
+                state.message = null // Clear message
             })
             .addCase(registerUser.rejected, (state, action) => {
                 state.isLoading = false
-                state.errorMessage = action.payload || 'Failed to register user'
+                state.message = action.payload?.message || 'Failed to register user'
             })
             .addCase(registerUser.fulfilled, (state, action) => {
-                state.user_email = action.payload.successMessage
+                state.user_email = action.payload.message
                     ? action.meta.arg.email
                     : null
                 state.isLoading = false
-                state.successMessage = action.payload.successMessage
-                state.errorMessage = action.payload.errorMessage
-                    ? cleanErrorMessage(action.payload.errorMessage)
+                state.message = action.payload.message
+                state.message = action.payload.message
+                    ? cleanErrorMessage(action.payload.message)
                     : null
+                state.statusCode = action.payload.statusCode
             })
             .addCase(verifyOtp.pending, (state) => {
                 state.isLoading = true // Set loading state
-                state.successMessage = null // Clear successMessage
-                state.errorMessage = null // Clear errorMessage
+                state.message = null // Clear message
             })
             .addCase(verifyOtp.rejected, (state, action) => {
                 state.isLoading = false
-                state.errorMessage = action.payload || 'Failed to register user'
+                state.message = action.payload.message || 'Failed to register user'
+                state.statusCode = action.payload.statusCode
             })
             .addCase(verifyOtp.fulfilled, (state, action) => {
                 state.isLoading = false
                 state.token = action.payload.access_token || null
                 state.refresh_token = action.payload.refresh || null
-                state.successMessage = action.payload.successMessage
+                state.message = action.payload.message
                 state.isLoggedIn = true
-                state.errorMessage = action.payload.errorMessage
-                    ? cleanErrorMessage(action.payload?.errorMessage)
+                state.message = action.payload.message
+                    ? cleanErrorMessage(action.payload?.message)
                     : null
+                state.statusCode = action.payload.statusCode
             })
             .addCase(loginUser.fulfilled, (state, action) => {
                 state.isLoading = false
                 state.isLoggedIn = true
                 state.token = action.payload.token || null
-                state.successMessage = action.payload.successMessage
-                state.errorMessage = cleanErrorMessage(
-                    action.payload.errorMessage
+                state.message = action.payload.message
+                state.message = cleanErrorMessage(
+                    action.payload.message
                 )
             })
     },

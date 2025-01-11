@@ -9,6 +9,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { registerUser } from '../../store/userSlice.js'
 import CustomMessage from '../common/custom_message/index.jsx'
 import Loader from '../common/loader/index.jsx'
+import toast from 'react-hot-toast'
 
 const RegisterForm = () => {
     const navigate = useNavigate()
@@ -16,46 +17,48 @@ const RegisterForm = () => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const dispatch = useDispatch()
-    const { successMessage, errorMessage, isLoading, user_email } = useSelector(
+    const { message, isLoading, user_email, statusCode } = useSelector(
         (state) => state.user
     )
 
     const handleRegister = () => {
-        dispatch(registerUser({ name, email, password }))
+        try {
+            dispatch(registerUser({ name, email, password }))
+        }
+        catch {
+            console.log("error");
+        }
     }
+
     useEffect(() => {
-        if (successMessage && user_email) {
-            alert('Moving you to the verification page in 3 seconds...')
+        if (message && user_email) {
+            toast.success("Account Created Successfully");
             const timer = setTimeout(() => {
                 navigate('/verify-otp')
-            }, 3000)
+            }, 2000)
             return () => clearTimeout(timer) // Cleanup timer on unmount
         }
-    }, [successMessage, user_email])
+    }, [message, user_email]);
 
     return (
         <div className="container">
             <div className="row justify-content-center">
                 <div className="col-md-6 justify-content-center">
-                    <h3 className="text-center fw-bolder mt-2 mb-2">
+                    <h3 className="text-center fw-bolder mt-1 mb-1">
                         Register
                     </h3>
                     <h6 className="text-center">
                         Experience the freedom of collaborative expense
                         management.
                     </h6>
-                    <div
-                        className="row justify-content-center"
-                        style={{ marginTop: '30px' }}
-                    >
+                    <div className="row justify-content-center">
                         <CustomMessage
-                            errorMessage={errorMessage}
-                            successMessage={successMessage}
+                            message={message}
+                            statusCode={statusCode}
                         />
-
                         <div className="row justify-content-center">
                             <TextField
-                                className="my-2"
+                                className="my-1"
                                 variant="outlined"
                                 placeholder="Name"
                                 label="Name"
@@ -68,7 +71,7 @@ const RegisterForm = () => {
                         </div>
                         <div className="row justify-content-center">
                             <TextField
-                                className="my-2"
+                                className="my-1"
                                 variant="outlined"
                                 placeholder="Email Address"
                                 label="Email address"
@@ -81,7 +84,7 @@ const RegisterForm = () => {
                         </div>
                         <div className="row justify-content-center">
                             <TextField
-                                className="my-2"
+                                className="my-1"
                                 variant="outlined"
                                 placeholder="Password"
                                 label="Password"
@@ -100,7 +103,7 @@ const RegisterForm = () => {
                                     variant="contained"
                                     type="submit"
                                     className="my-4 btn-outline-primary"
-                                    style={{ 'max-width': '25%' }}
+                                    style={{ 'maxWidth': '25%' }}
                                     onClick={handleRegister}
                                     disabled={isLoading}
                                 >
@@ -111,7 +114,7 @@ const RegisterForm = () => {
                         </div>
                     </div>
 
-                    <div className="text-center my-3">
+                    <div className="text-center my-1">
                         <p>
                             Already a member? <Link to="/login">Login</Link>
                         </p>

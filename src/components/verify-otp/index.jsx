@@ -8,7 +8,7 @@ import { verifyOtp } from '../../store/userSlice.js'
 import { useNavigate } from 'react-router-dom'
 
 const VerifyOTPForm = () => {
-    const { errorMessage, isLoading, user_email, token } = useSelector(
+    const { message, isLoading, user_email, token, statusCode } = useSelector(
         (state) => state.user
     )
     const [otp, setOtp] = useState(null)
@@ -41,14 +41,13 @@ const VerifyOTPForm = () => {
                         style={{ marginTop: '30px' }}
                     >
                         <CustomMessage
-                            errorMessage={errorMessage}
-                            successMessage={
+                            message={
                                 token
-                                    ? 'Verification successful. Logging you in...'
-                                    : null
+                                    ? 'Verification successful.'
+                                    : message
                             }
+                            statusCode={statusCode}
                         />
-
                         <div className="row justify-content-center">
                             <TextField
                                 className="my-2"
@@ -64,7 +63,7 @@ const VerifyOTPForm = () => {
                         </div>
                         <div className="d-flex justify-content-center">
                             {isLoading ? (
-                                <Loader></Loader>
+                                <Loader />
                             ) : (
                                 <Button
                                     variant="contained"
