@@ -1,4 +1,4 @@
-import * as React from 'react'
+import { useEffect, useState } from 'react'
 
 import LoginModal from '../../../login_modal/index.jsx'
 import AppBar from '@mui/material/AppBar'
@@ -25,7 +25,7 @@ const logoStyle = {
 }
 
 function AppNavbar() {
-    const { isLoggedIn } = useSelector((state) => state.user)
+    const { isLoggedIn, token } = useSelector((state) => state.user)
     const navigate = useNavigate()
     const dispatch = useDispatch()
     const logged_in_pages = [
@@ -44,9 +44,9 @@ function AppNavbar() {
     ]
     const pages = isLoggedIn ? logged_in_pages : logged_out_pages
 
-    const [open, setOpen] = React.useState(false)
-    const [openLoginModal, setOpenLoginModal] = React.useState(false)
-    const [openReisterModal, setOpenResigterModal] = React.useState(false)
+    const [open, setOpen] = useState(false)
+    const [openLoginModal, setOpenLoginModal] = useState(false)
+    const [openReisterModal, setOpenResigterModal] = useState(false)
     const handleOpenLoginModal = () => setOpenLoginModal(true)
     const handleCloseLoginModal = () => setOpenLoginModal(false)
     const handleOpenRegisterModal = () => setOpenResigterModal(true)
@@ -57,14 +57,17 @@ function AppNavbar() {
     }
 
     const handleLogout = async () => {
-        dispatch(logout());
+        await dispatch(logout());
         await persistor.purge();
+        await persistor.flush();
         toast.success('Logged out successfully');
-        const timer = setTimeout(() => {
-            navigate('/');
-        }, 200);
-        return () => clearTimeout(timer);
     };
+
+    useEffect(() => {
+        if (!token) {
+            navigate('/'); // Redirect if user is logged out
+        }
+    }, [token, navigate]);
 
     return (
         <>

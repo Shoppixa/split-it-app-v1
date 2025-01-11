@@ -4,13 +4,46 @@ import Box from '@mui/material/Box'
 import PropTypes from 'prop-types'
 import './style.css'
 import Button from '@mui/material/Button'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import logo from '../../assets/brand/brand-big.png'
 import GoogleIcon from '@mui/icons-material/Google'
 import FacebookIcon from '@mui/icons-material/Facebook'
 import GitHubIcon from '@mui/icons-material/GitHub'
+import { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { loginUser } from '../../store/userSlice'
+import CustomMessage from '../common/custom_message'
+import toast from 'react-hot-toast'
 
 const LoginModal = (props) => {
+    const navigate = useNavigate()
+    const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
+    const dispatch = useDispatch()
+    const { message, isLoading, token, statusCode } = useSelector(
+        (state) => state.user
+    )
+
+    const handleLogin = () => {
+        try {
+            dispatch(loginUser({ email, password }))
+        }
+        catch {
+            console.log("error");
+        }
+    }
+
+    useEffect(() => {
+        if (token) {
+            props.handleCloseLoginModal()
+            toast.success(message || "Login Successful");
+            const timer = setTimeout(() => {
+                navigate('/dashboard')
+            }, 200)
+            return () => clearTimeout(timer) // Cleanup timer on unmount
+        }
+    }, [token]);
+
     const style = {
         position: 'absolute',
         top: '50%',
@@ -50,6 +83,10 @@ const LoginModal = (props) => {
                                     Recommendations
                                 </h6>
                             </div>
+                            <CustomMessage
+                                message={message}
+                                statusCode={statusCode}
+                            />
                             <h6 className="mt-2 pb-1 text-dark text-center">
                                 Sign in with:
                             </h6>
@@ -96,6 +133,8 @@ const LoginModal = (props) => {
                                 label="Email address"
                                 id="form1"
                                 type="email"
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value)}
                             />
                             <TextField
                                 className="my-1"
@@ -104,12 +143,16 @@ const LoginModal = (props) => {
                                 label="Password"
                                 id="form2"
                                 type="password"
+                                value={password}
+                                onChange={(e) => setPassword(e.target.value)}
                             />
 
                             <div className="text-center pt-1 mb-2 pb-1">
                                 <Button
                                     variant="contained"
                                     className="my-4 w-100"
+                                    onClick={handleLogin}
+                                    disabled={isLoading}
                                 >
                                     Sign in
                                 </Button>

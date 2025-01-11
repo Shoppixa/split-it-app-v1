@@ -4,6 +4,7 @@ export function cleanErrorMessage(errorMessage) {
         'OTPNotVerifiedError:',
         'ValueError:',
         'UserAlreadyVerifiedError: ',
+        'UserAuthenticationFailedError: ',
     ]
     // Iterate through the list of prefixes
     for (const prefix of prefixes) {

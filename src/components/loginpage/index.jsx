@@ -1,11 +1,43 @@
 import { TextField } from '@mui/material'
 import Button from '@mui/material/Button'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import GoogleIcon from '@mui/icons-material/Google.js'
 import FacebookIcon from '@mui/icons-material/Facebook.js'
 import GitHubIcon from '@mui/icons-material/GitHub.js'
+import { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { loginUser } from '../../store/userSlice'
+import CustomMessage from '../common/custom_message'
+import toast from 'react-hot-toast'
 
 const LoginForm = () => {
+    const navigate = useNavigate()
+    const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
+    const dispatch = useDispatch()
+    const { message, isLoading, token, statusCode } = useSelector(
+        (state) => state.user
+    )
+
+    const handleLogin = () => {
+        try {
+            dispatch(loginUser({ email, password }))
+        }
+        catch {
+            console.log("error");
+        }
+    }
+
+    useEffect(() => {
+        if (token) {
+            toast.success(message || "Login Successful");
+            const timer = setTimeout(() => {
+                navigate('/dashboard')
+            }, 200)
+            return () => clearTimeout(timer) // Cleanup timer on unmount
+        }
+    }, [token]);
+
     return (
         <div className="container">
             <div className="row justify-content-center">
@@ -15,6 +47,10 @@ const LoginForm = () => {
                         Experience the freedom of collaborative expense
                         management.
                     </h6>
+                    <CustomMessage
+                        message={message}
+                        statusCode={statusCode}
+                    />
                     <div
                         className="row justify-content-center"
                         style={{ marginTop: '30px' }}
@@ -28,6 +64,8 @@ const LoginForm = () => {
                                 id="form1"
                                 type="email"
                                 style={{ maxWidth: '300px' }}
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value)}
                             />
                         </div>
                         <div className="row justify-content-center">
@@ -39,6 +77,8 @@ const LoginForm = () => {
                                 id="form2"
                                 type="password"
                                 style={{ maxWidth: '300px' }}
+                                value={password}
+                                onChange={(e) => setPassword(e.target.value)}
                             />
                         </div>
 
@@ -47,6 +87,8 @@ const LoginForm = () => {
                             type="submit"
                             className="my-4 btn-outline-primary"
                             style={{ maxWidth: '25%' }}
+                            onClick={handleLogin}
+                            disabled={isLoading}
                         >
                             Sign in
                         </Button>
