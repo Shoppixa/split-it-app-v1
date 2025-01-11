@@ -35,7 +35,7 @@ const RegisterForm = () => {
             toast.success("Account Created Successfully");
             const timer = setTimeout(() => {
                 navigate('/verify-otp')
-            }, 2000)
+            }, 200)
             return () => clearTimeout(timer) // Cleanup timer on unmount
         }
     }, [message, user_email]);

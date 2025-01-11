@@ -1,7 +1,6 @@
 import { Fade, Modal, TextField } from '@mui/material'
 import Backdrop from '@mui/material/Backdrop'
 import Box from '@mui/material/Box'
-import Typography from '@mui/material/Typography'
 import PropTypes from 'prop-types'
 import './style.css'
 import logo from '../../assets/brand/brand-big.png'
@@ -9,9 +8,44 @@ import Button from '@mui/material/Button'
 import GoogleIcon from '@mui/icons-material/Google.js'
 import FacebookIcon from '@mui/icons-material/Facebook.js'
 import GitHubIcon from '@mui/icons-material/GitHub.js'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
+import Loader from '../common/loader'
+import toast from 'react-hot-toast'
+import { useState, useEffect } from 'react'
+import CustomMessage from '../common/custom_message'
+import { registerUser } from '../../store/userSlice'
 
-const RegisterModal = (props) => {
+const RegisterModal = ({ openRegisterModal, handleCloseRegisterModal }) => {
+    const navigate = useNavigate()
+    const [name, setName] = useState('')
+    const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
+    const dispatch = useDispatch()
+    const { message, isLoading, user_email, statusCode } = useSelector(
+        (state) => state.user
+    )
+
+    const handleRegister = () => {
+        try {
+            dispatch(registerUser({ name, email, password }))
+        }
+        catch {
+            console.log("error");
+        }
+    }
+
+    useEffect(() => {
+        if (message && user_email) {
+            toast.success("Account Created Successfully");
+            handleCloseRegisterModal();
+            const timer = setTimeout(() => {
+                navigate('/verify-otp')
+            }, 200)
+            return () => clearTimeout(timer) // Cleanup timer on unmount
+        }
+    }, [message, user_email]);
+
     const style = {
         position: 'absolute',
         top: '50%',
@@ -27,8 +61,8 @@ const RegisterModal = (props) => {
             <Modal
                 aria-labelledby="transition-modal-title"
                 aria-describedby="transition-modal-description"
-                open={props.openRegisterModal}
-                onClose={props.handleCloseRegisterModal}
+                open={openRegisterModal}
+                onClose={handleCloseRegisterModal}
                 closeAfterTransition
                 slots={{ backdrop: Backdrop }}
                 slotProps={{
@@ -37,7 +71,7 @@ const RegisterModal = (props) => {
                     },
                 }}
             >
-                <Fade in={props.openRegisterModal}>
+                <Fade in={openRegisterModal}>
                     <Box sx={style} className="registerModalBody">
                         <div className="d-flex flex-column mt-0">
                             <div className="text-center text-dark">
@@ -55,6 +89,10 @@ const RegisterModal = (props) => {
                                 Sign up with:
                             </h6>
                             <div className="row d-flex justify-content-center">
+                                <CustomMessage
+                                    message={message}
+                                    statusCode={statusCode}
+                                />
                                 <Button
                                     className="m-1"
                                     style={{
@@ -97,6 +135,8 @@ const RegisterModal = (props) => {
                                 label="Name"
                                 id="form1"
                                 type="text"
+                                value={name}
+                                onChange={(e) => setName(e.target.value)}
                             />
                             <TextField
                                 className="my-1 inputBox"
@@ -105,6 +145,8 @@ const RegisterModal = (props) => {
                                 label="Email address"
                                 id="form2"
                                 type="email"
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value)}
                             />
                             <TextField
                                 className="my-1"
@@ -113,15 +155,20 @@ const RegisterModal = (props) => {
                                 label="Password"
                                 id="form3"
                                 type="password"
+                                value={password}
+                                onChange={(e) => setPassword(e.target.value)}
                             />
-
                             <div className="text-center pt-1 mb-2 pb-1">
-                                <Button
+                                {isLoading ? (
+                                    <Loader></Loader>
+                                ) : (<Button
                                     variant="contained"
                                     className="my-4 w-100"
+                                    onClick={handleRegister}
+                                    disabled={isLoading}
                                 >
                                     Sign Up
-                                </Button>
+                                </Button>)}
                             </div>
 
                             <div className="d-flex flex-row align-items-center justify-content-center pb-4 my-2">

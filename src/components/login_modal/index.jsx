@@ -32,7 +32,7 @@ const LoginModal = (props) => {
                 slots={{ backdrop: Backdrop }}
                 slotProps={{
                     backdrop: {
-                        timeout: 500,
+                        timeout: 200,
                     },
                 }}
             >

@@ -21,7 +21,7 @@ const VerifyOTPForm = () => {
         if (token) {
             const timer = setTimeout(() => {
                 navigate('/dashboard')
-            }, 3000)
+            }, 200)
             return () => clearTimeout(timer)
         }
     })
