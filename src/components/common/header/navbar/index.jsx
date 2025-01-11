@@ -62,7 +62,7 @@ function AppNavbar() {
         toast.success('Logged out successfully');
         const timer = setTimeout(() => {
             navigate('/');
-        }, 2000);
+        }, 200);
         return () => clearTimeout(timer);
     };
 
