@@ -21,7 +21,7 @@ const CustomMessage = ({ message, statusCode }) => {
     return (
         <div className="my-4">
             {message && (
-                <Alert variant="outlined" severity={severity}>
+                <Alert variant="outlined" severity={severity ? severity : 'info'}>
                     {message}
                 </Alert>
             )}

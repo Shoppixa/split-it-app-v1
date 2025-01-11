@@ -46,7 +46,7 @@ const VerifyOTPForm = () => {
                                     ? 'Verification successful.'
                                     : message
                             }
-                            type={statusCode}
+                            statusCode={statusCode}
                         />
                         <div className="row justify-content-center">
                             <TextField

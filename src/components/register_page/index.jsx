@@ -32,13 +32,13 @@ const RegisterForm = () => {
 
     useEffect(() => {
         if (message && user_email) {
-            toast.success("Account Created Successfully")
+            toast.success("Account Created Successfully");
             const timer = setTimeout(() => {
                 navigate('/verify-otp')
             }, 2000)
             return () => clearTimeout(timer) // Cleanup timer on unmount
         }
-    }, [message, user_email])
+    }, [message, user_email]);
 
     return (
         <div className="container">

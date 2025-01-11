@@ -13,8 +13,11 @@ import ReceiptLongIcon from '@mui/icons-material/ReceiptLong'
 import './style.css'
 import Box from '@mui/material/Box'
 import RegisterModal from '../../../register_modal/index.jsx'
-import { Link } from 'react-router-dom'
-import { useSelector } from 'react-redux'
+import { Link, useNavigate } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
+import { persistor } from '../../../../store/store.js'
+import toast from 'react-hot-toast'
+import { logout } from '../../../../store/userSlice.js'
 
 const logoStyle = {
     height: 'auto',
@@ -23,6 +26,8 @@ const logoStyle = {
 
 function AppNavbar() {
     const { isLoggedIn } = useSelector((state) => state.user)
+    const navigate = useNavigate()
+    const dispatch = useDispatch()
     const logged_in_pages = [
         { url: 'dashboard', name: 'Dashboard' },
         { url: 'profile', name: 'Profile' },
@@ -50,6 +55,16 @@ function AppNavbar() {
     const toggleDrawer = (newOpen) => () => {
         setOpen(newOpen)
     }
+
+    const handleLogout = async () => {
+        dispatch(logout());
+        await persistor.purge();
+        toast.success('Logged out successfully');
+        const timer = setTimeout(() => {
+            navigate('/');
+        }, 2000);
+        return () => clearTimeout(timer);
+    };
 
     return (
         <>
@@ -134,6 +149,7 @@ function AppNavbar() {
                                         size="small"
                                         component="a"
                                         target="_blank"
+                                        onClick={handleLogout}
                                     >
                                         Logout
                                     </Button>
@@ -210,6 +226,7 @@ function AppNavbar() {
                                                     component="a"
                                                     target="_blank"
                                                     sx={{ width: '100%' }}
+                                                    onClick={handleLogout}
                                                 >
                                                     Logout
                                                 </Button>

@@ -27,7 +27,7 @@ export const registerUser = createAsyncThunk(
 )
 export const verifyOtp = createAsyncThunk(
     'verifyOtp',
-    async ({ user_email, otp }) => {
+    async ({ user_email, otp }, thunkAPI) => {
         try {
             let otpData = {
                 email: user_email,
@@ -43,15 +43,17 @@ export const verifyOtp = createAsyncThunk(
                 access_token: response.data.token?.access,
                 refresh: response.data.token?.refresh,
                 message: response.data.message,
+                statusCode: response.status
             }
         } catch (error) {
-            return AxiosToastError(error)
+            const errorPayload = AxiosToastError(error);
+            return thunkAPI.rejectWithValue({ message: cleanErrorMessage(errorPayload.message), statusCode: error.status });
         }
     }
 )
 export const loginUser = createAsyncThunk(
     'login',
-    async (userData) => {
+    async (userData, thunkAPI) => {
         try {
             const response = await Axios({
                 ...SummaryApi.login,
@@ -62,7 +64,8 @@ export const loginUser = createAsyncThunk(
                 token: response.data.token, // Include token if login is successful
             }
         } catch (error) {
-            return AxiosToastError(error)
+            const errorPayload = AxiosToastError(error);
+            return thunkAPI.rejectWithValue({ message: cleanErrorMessage(errorPayload.message), statusCode: error.status });
         }
     }
 )
@@ -100,12 +103,10 @@ const userSlice = createSlice({
                 state.message = null // Clear message
             })
             .addCase(registerUser.rejected, (state, action) => {
-                console.log('Rejected',action.payload);
                 state.isLoading = false
                 state.message = action.payload?.message || 'Failed to register user'
             })
             .addCase(registerUser.fulfilled, (state, action) => {
-                console.log('Fulfilled',action.payload);
                 state.user_email = action.payload.message
                     ? action.meta.arg.email
                     : null
@@ -123,6 +124,7 @@ const userSlice = createSlice({
             .addCase(verifyOtp.rejected, (state, action) => {
                 state.isLoading = false
                 state.message = action.payload.message || 'Failed to register user'
+                state.statusCode = action.payload.statusCode
             })
             .addCase(verifyOtp.fulfilled, (state, action) => {
                 state.isLoading = false
@@ -133,6 +135,7 @@ const userSlice = createSlice({
                 state.message = action.payload.message
                     ? cleanErrorMessage(action.payload?.message)
                     : null
+                state.statusCode = action.payload.statusCode
             })
             .addCase(loginUser.fulfilled, (state, action) => {
                 state.isLoading = false
