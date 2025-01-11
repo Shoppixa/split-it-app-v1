@@ -6,9 +6,9 @@ import { resetMessages } from '../../../store/userSlice.js'
 
 const CustomMessage = ({ message, statusCode }) => {
     const dispatch = useDispatch()
-    // const success_status_code_list = ['200', '201']
-    // const severity = success_status_code_list.includes(statusCode) ? 'success' : 'error';
-    
+    const success_status_code_list = [200, 201]
+    const severity = success_status_code_list.includes(statusCode) ? 'success' : 'error';
+
     useEffect(() => {
         if (message) {
             const timer = setTimeout(() => {
@@ -21,7 +21,7 @@ const CustomMessage = ({ message, statusCode }) => {
     return (
         <div className="my-4">
             {message && (
-                <Alert variant="outlined" severity={'error'}>
+                <Alert variant="outlined" severity={severity}>
                     {message}
                 </Alert>
             )}

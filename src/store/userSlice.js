@@ -18,10 +18,10 @@ export const registerUser = createAsyncThunk(
                 ...SummaryApi.register,
                 data: payload,
             });
-            return { message: response.data.message };
+            return { message: response.data.message, statusCode: response.status };
         } catch (error) {
             const errorPayload = AxiosToastError(error);
-            return thunkAPI.rejectWithValue({ message: cleanErrorMessage(errorPayload.message) });
+            return thunkAPI.rejectWithValue({ message: cleanErrorMessage(errorPayload.message), statusCode: error.status });
         }
     }
 )
@@ -75,6 +75,7 @@ const initialValue = {
     message: null,
     isLoading: false,
     isLoggedIn: false,
+    statusCode: '',
 }
 
 const userSlice = createSlice({
@@ -99,10 +100,12 @@ const userSlice = createSlice({
                 state.message = null // Clear message
             })
             .addCase(registerUser.rejected, (state, action) => {
+                console.log('Rejected',action.payload);
                 state.isLoading = false
                 state.message = action.payload?.message || 'Failed to register user'
             })
             .addCase(registerUser.fulfilled, (state, action) => {
+                console.log('Fulfilled',action.payload);
                 state.user_email = action.payload.message
                     ? action.meta.arg.email
                     : null
@@ -111,6 +114,7 @@ const userSlice = createSlice({
                 state.message = action.payload.message
                     ? cleanErrorMessage(action.payload.message)
                     : null
+                state.statusCode = action.payload.statusCode
             })
             .addCase(verifyOtp.pending, (state) => {
                 state.isLoading = true // Set loading state

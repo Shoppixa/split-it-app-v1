@@ -17,7 +17,7 @@ const RegisterForm = () => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const dispatch = useDispatch()
-    const { message, isLoading, user_email } = useSelector(
+    const { message, isLoading, user_email, statusCode } = useSelector(
         (state) => state.user
     )
 
@@ -35,7 +35,7 @@ const RegisterForm = () => {
             toast.success("Account Created Successfully")
             const timer = setTimeout(() => {
                 navigate('/verify-otp')
-            }, 1000)
+            }, 2000)
             return () => clearTimeout(timer) // Cleanup timer on unmount
         }
     }, [message, user_email])
@@ -54,7 +54,7 @@ const RegisterForm = () => {
                     <div className="row justify-content-center">
                         <CustomMessage
                             message={message}
-                            statusCode={201}
+                            statusCode={statusCode}
                         />
                         <div className="row justify-content-center">
                             <TextField

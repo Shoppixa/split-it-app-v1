@@ -8,7 +8,7 @@ import { verifyOtp } from '../../store/userSlice.js'
 import { useNavigate } from 'react-router-dom'
 
 const VerifyOTPForm = () => {
-    const { message, isLoading, user_email, token } = useSelector(
+    const { message, isLoading, user_email, token, statusCode } = useSelector(
         (state) => state.user
     )
     const [otp, setOtp] = useState(null)
@@ -43,10 +43,10 @@ const VerifyOTPForm = () => {
                         <CustomMessage
                             message={
                                 token
-                                    ? 'Verification successful. Logging you in...'
+                                    ? 'Verification successful.'
                                     : message
                             }
-                            type="success"
+                            type={statusCode}
                         />
                         <div className="row justify-content-center">
                             <TextField
@@ -62,21 +62,21 @@ const VerifyOTPForm = () => {
                             />
                         </div>
                         <div className="d-flex justify-content-center">
-                            {/* {isLoading ? (
+                            {isLoading ? (
                                 <Loader />
-                            ) : ( */}
-                            <Button
-                                variant="contained"
-                                type="submit"
-                                className="my-4 btn-outline-primary"
-                                style={{ 'max-width': '25%' }}
-                                onClick={handleVerify}
-                            // disabled={isLoading}
-                            >
-                                {' '}
-                                Verify
-                            </Button>
-                            {/* )} */}
+                            ) : (
+                                <Button
+                                    variant="contained"
+                                    type="submit"
+                                    className="my-4 btn-outline-primary"
+                                    style={{ 'max-width': '25%' }}
+                                    onClick={handleVerify}
+                                    disabled={isLoading}
+                                >
+                                    {' '}
+                                    Verify
+                                </Button>
+                            )}
                         </div>
                     </div>
                 </div>
