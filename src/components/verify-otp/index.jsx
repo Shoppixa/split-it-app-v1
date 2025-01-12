@@ -24,7 +24,7 @@ const VerifyOTPForm = () => {
             }, 200)
             return () => clearTimeout(timer)
         }
-    })
+    },[])
     return (
         <div className="container">
             <div className="row justify-content-center">
