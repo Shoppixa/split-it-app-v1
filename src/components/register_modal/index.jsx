@@ -34,7 +34,6 @@ const RegisterModal = ({ openRegisterModal, handleCloseRegisterModal }) => {
 
     useEffect(() => {
         if (message && user_email) {
-            toast.success('Account Created Successfully')
             handleCloseRegisterModal()
             const timer = setTimeout(() => {
                 navigate('/verify-otp')

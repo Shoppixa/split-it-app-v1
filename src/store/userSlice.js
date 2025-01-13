@@ -3,6 +3,7 @@ import SummaryApi from '../common/SummaryApi.js'
 import Axios from '../utils/Axios.js'
 import { cleanErrorMessage } from '../utils/helpers.js'
 import { AxiosToastError } from '../utils/AxiosToastError.js'
+import toast from 'react-hot-toast'
 
 export const registerUser = createAsyncThunk('registerUser', async (userData, thunkAPI) => {
     const payload = {
@@ -92,9 +93,9 @@ const userSlice = createSlice({
         logout: (state) => {
             state.user_email = null
             state.token = null
-            state.refresh_token = null,
-            state.isLoggedIn = false,
-            state.isLoading = false
+            ;(state.refresh_token = null), (state.isLoggedIn = false), (state.isLoading = false)
+            state.isLoggedIn = false
+            toast.success('Logged out successfully')
         },
     },
     extraReducers: (builder) => {
@@ -116,6 +117,7 @@ const userSlice = createSlice({
                     ? cleanErrorMessage(action.payload.message)
                     : null
                 state.statusCode = action.payload.statusCode
+                toast.success(action.payload.message || 'Account Created Successfully')
             })
             .addCase(verifyOtp.pending, (state) => {
                 state.isLoading = true // Set loading state
@@ -136,6 +138,7 @@ const userSlice = createSlice({
                     ? cleanErrorMessage(action.payload?.message)
                     : null
                 state.statusCode = action.payload.statusCode
+                toast.success(action.payload.message || 'Login Successful')
             })
             .addCase(loginUser.pending, (state) => {
                 state.isLoading = true // Set loading state
@@ -153,6 +156,7 @@ const userSlice = createSlice({
                 state.message = action.payload.message
                 state.message = action.payload.message
                 state.statusCode = action.payload.statusCode
+                toast.error(action.payload.message || 'Login Successful')
             })
     },
 })

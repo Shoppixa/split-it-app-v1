@@ -27,7 +27,6 @@ const LoginForm = () => {
 
     useEffect(() => {
         if (token) {
-            toast.success(message || 'Login Successful')
             const timer = setTimeout(() => {
                 navigate('/dashboard')
             }, 200)

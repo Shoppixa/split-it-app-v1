@@ -29,7 +29,6 @@ const RegisterForm = () => {
 
     useEffect(() => {
         if (message && user_email) {
-            toast.success('Account Created Successfully')
             const timer = setTimeout(() => {
                 navigate('/verify-otp')
             }, 200)

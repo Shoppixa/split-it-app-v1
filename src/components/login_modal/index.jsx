@@ -33,7 +33,6 @@ const LoginModal = (props) => {
     useEffect(() => {
         if (token) {
             props.handleCloseLoginModal()
-            toast.success(message || 'Login Successful')
             const timer = setTimeout(() => {
                 navigate('/dashboard')
             }, 200)
