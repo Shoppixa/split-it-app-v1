@@ -90,9 +90,10 @@ const userSlice = createSlice({
             state.isLoading = false
         },
         logout: (state) => {
-            state.user = null
+            state.user_email = null
             state.token = null
-            state.refresh_token = null
+            state.refresh_token = null,
+            state.isLoggedIn = false,
             state.isLoading = false
         },
     },

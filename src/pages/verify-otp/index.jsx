@@ -12,7 +12,7 @@ const VerifyOTP = () => {
         if (!user_email) {
             navigate('/register')
         }
-    })
+    },[])
     return (
         <div className="container">
             <div className="text-center my-2">
