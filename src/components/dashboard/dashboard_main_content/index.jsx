@@ -5,9 +5,7 @@ import ExpenseChart from './expense_chart.jsx'
 const DashboardMainContent = () => {
     return (
         <>
-            <h4 className="text-center mt-5 mb-2 shadow-5-strong p-2 fw-bolder">
-                Expense Reports
-            </h4>
+            <h4 className="text-center mt-5 mb-2 shadow-5-strong p-2 fw-bolder">Expense Reports</h4>
             <div className="row p-2 justify-content-center">
                 <div className="col-md-6 shadow p-2 my-2 justify-content-center">
                     <GroupChart />

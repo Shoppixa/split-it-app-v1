@@ -1,4 +1,4 @@
-import { configureStore } from '@reduxjs/toolkit';
+import { configureStore } from '@reduxjs/toolkit'
 import {
     persistStore,
     persistReducer,
@@ -9,17 +9,17 @@ import {
     PURGE,
     REGISTER,
 } from 'redux-persist'
-import storage from 'redux-persist/lib/storage'; // Uses localStorage for web
-import rootReducer from './rootReducer'; // Your slice
+import storage from 'redux-persist/lib/storage' // Uses localStorage for web
+import rootReducer from './rootReducer' // Your slice
 
 // Redux-Persist Configuration
 const persistConfig = {
     key: 'root', // Key to identify storage
-    storage,     // Storage method (localStorage)
+    storage, // Storage method (localStorage)
     whitelist: ['user'], // Reducer to persist
-};
+}
 
-const persistedReducer = persistReducer(persistConfig, rootReducer);
+const persistedReducer = persistReducer(persistConfig, rootReducer)
 
 // Configure Store
 const store = configureStore({
@@ -32,5 +32,5 @@ const store = configureStore({
         })
 });
 
-export const persistor = persistStore(store);
-export default store;
+export const persistor = persistStore(store)
+export default store

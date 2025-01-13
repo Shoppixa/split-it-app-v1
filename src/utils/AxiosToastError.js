@@ -14,4 +14,3 @@ export const AxiosToastError = (error) => {
         return { message: error.message || 'Something went wrong' };
     }
 }
-

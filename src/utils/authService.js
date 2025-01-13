@@ -8,8 +8,7 @@ const handleErrors = (error) => {
         // If the error has a response from the backend
         return {
             successMessage: null,
-            errorMessage:
-                error.response.data.errorMessage || 'An error occurred',
+            errorMessage: error.response.data.errorMessage || 'An error occurred',
         }
     } else if (error.request) {
         // If no response was received from the backend
@@ -34,10 +33,7 @@ const register = async (userData) => {
         password: userData['password'],
     }
     try {
-        const response = await axios.post(
-            `${API_URL}/auth/api/v2/create-users`,
-            userData
-        )
+        const response = await axios.post(`${API_URL}/auth/api/v2/create-users`, userData)
         return {
             successMessage: response.data.successMessage,
             errorMessage: null,
@@ -53,10 +49,7 @@ const verifyOtp = async (otpData) => {
             email: otpData['user_email'],
             otp: otpData['otp'],
         }
-        const response = await axios.post(
-            `${API_URL}/auth/api/v2/verify-otp`,
-            otpData
-        )
+        const response = await axios.post(`${API_URL}/auth/api/v2/verify-otp`, otpData)
         return {
             access_token: response.data.token?.access,
             refresh: response.data.token?.refresh,
@@ -70,10 +63,7 @@ const verifyOtp = async (otpData) => {
 
 const login = async (userData) => {
     try {
-        const response = await axios.post(
-            `${API_URL}/auth/api/v2/sign-in`,
-            userData
-        )
+        const response = await axios.post(`${API_URL}/auth/api/v2/sign-in`, userData)
         return {
             successMessage: response.data.successMessage,
             errorMessage: null,

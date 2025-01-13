@@ -10,9 +10,7 @@ const Homepage = () => {
                     <h1 className="text-center fw-bolder">
                         Let's split the bills not the friendships.
                     </h1>
-                    <p className="text-center">
-                        We organize your bills, so you can chill.
-                    </p>
+                    <p className="text-center">We organize your bills, so you can chill.</p>
                     <div className="d-flex justify-content-center">
                         <Link to="/dashboard">
                             <Button variant="contained">Get Started</Button>

@@ -1,5 +1,5 @@
-import { createBrowserRouter } from "react-router-dom";
-import App from "../App";
+import { createBrowserRouter } from 'react-router-dom'
+import App from '../App'
 import Homepage from '../pages/home/index.jsx'
 import UserDashboard from '../pages/dashboard/index.jsx'
 import ProtectedRoute from '../components/protected_component/index.jsx'
@@ -16,58 +16,96 @@ import VerifyOTP from '../pages/verify-otp/index.jsx'
 
 const router = createBrowserRouter([
     {
-        path: "/",
+        path: '/',
         element: <App />,
         children: [
             {
-                path: "",
-                element: <Homepage />
+                path: '',
+                element: <Homepage />,
             },
             {
                 path: 'login',
-                element: <LoginPage />
+                element: <LoginPage />,
             },
             {
-                path: "register",
-                element: <RegisterPage />
+                path: 'register',
+                element: <RegisterPage />,
             },
             // {
             //     path: "forgot-password",
             //     element: <ForgotPassword />
             // },
             {
-                path: "verify-otp",
-                element: <VerifyOTP />
+                path: 'verify-otp',
+                element: <VerifyOTP />,
             },
             // {
             //     path : "reset-password",
             //     element : <ResetPassword/>
             // },
             {
-                path: "dashboard",
-                element: <ProtectedRoute><UserDashboard /></ProtectedRoute>,
+                path: 'dashboard',
+                element: (
+                    <ProtectedRoute>
+                        <UserDashboard />
+                    </ProtectedRoute>
+                ),
             },
             {
-                path: "profile",
-                element: <ProtectedRoute><Profile /></ProtectedRoute>,
-            }, {
-                path: "groups",
-                element: <ProtectedRoute><Groups /></ProtectedRoute>,
-            }, {
-                path: "friends",
-                element: <ProtectedRoute><Friends /></ProtectedRoute>,
-            }, {
-                path: "myexpenses",
-                element: <ProtectedRoute><MyExpenses /></ProtectedRoute>,
-            }, {
-                path: "/group/:id",
-                element: <ProtectedRoute><Group /></ProtectedRoute>,
-            }, {
-                path: "/user/:id",
-                element: <ProtectedRoute><UserProfile /></ProtectedRoute>,
-            }, {
-                path: "/expense/:id",
-                element: <ProtectedRoute><ExpenseDetails /></ProtectedRoute>,
+                path: 'profile',
+                element: (
+                    <ProtectedRoute>
+                        <Profile />
+                    </ProtectedRoute>
+                ),
+            },
+            {
+                path: 'groups',
+                element: (
+                    <ProtectedRoute>
+                        <Groups />
+                    </ProtectedRoute>
+                ),
+            },
+            {
+                path: 'friends',
+                element: (
+                    <ProtectedRoute>
+                        <Friends />
+                    </ProtectedRoute>
+                ),
+            },
+            {
+                path: 'myexpenses',
+                element: (
+                    <ProtectedRoute>
+                        <MyExpenses />
+                    </ProtectedRoute>
+                ),
+            },
+            {
+                path: '/group/:id',
+                element: (
+                    <ProtectedRoute>
+                        <Group />
+                    </ProtectedRoute>
+                ),
+            },
+            {
+                path: '/user/:id',
+                element: (
+                    <ProtectedRoute>
+                        <UserProfile />
+                    </ProtectedRoute>
+                ),
+            },
+            {
+                path: '/expense/:id',
+                element: (
+                    <ProtectedRoute>
+                        <ExpenseDetails />
+                    </ProtectedRoute>
+                ),
             },
             // {
             //     path: "success",
@@ -77,8 +115,8 @@ const router = createBrowserRouter([
             //     path: 'cancel',
             //     element: <Cancel />
             // }
-        ]
-    }
+        ],
+    },
 ])
 
 export default router

@@ -21,10 +21,7 @@ const SideNavbar = () => {
             <ul className="list-group">
                 {side_nav_pages.map((page) => (
                     <p key={page.name} className="shadow py-1">
-                        <Link
-                            to={page.url}
-                            className="text-dark text-decoration-none"
-                        >
+                        <Link to={page.url} className="text-dark text-decoration-none">
                             {page.name}
                         </Link>
                     </p>

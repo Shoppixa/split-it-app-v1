@@ -42,9 +42,7 @@ const ProfileDetails = () => {
                         <Input
                             hidden
                             type="file"
-                            onChange={(event) =>
-                                console.log(event.target.files)
-                            }
+                            onChange={(event) => console.log(event.target.files)}
                             multiple
                         />
                     </Button>
@@ -62,9 +60,7 @@ const ProfileDetails = () => {
                         <Input
                             hidden
                             type="file"
-                            onChange={(event) =>
-                                console.log(event.target.files)
-                            }
+                            onChange={(event) => console.log(event.target.files)}
                             multiple
                         />
                     </Button>
@@ -97,11 +93,7 @@ const ProfileDetails = () => {
                             />
                             <p>Date Of Birth</p>
                             <LocalizationProvider dateAdapter={AdapterDayjs}>
-                                <DatePicker
-                                    label="10/04/2003"
-                                    className="mb-4"
-                                    size="small"
-                                />
+                                <DatePicker label="10/04/2003" className="mb-4" size="small" />
                             </LocalizationProvider>
                             <p>Phone Number</p>
                             <TextField
@@ -142,22 +134,14 @@ const ProfileDetails = () => {
                                             className="rounded-circle ms-0"
                                         />
                                         <div className="ms-3">
-                                            <p className="mb-1">
-                                                {friend.label}
-                                            </p>
+                                            <p className="mb-1">{friend.label}</p>
                                         </div>
                                     </div>
                                     <div>
-                                        <Button
-                                            className="bg-primary text-light mx-1"
-                                            size="small"
-                                        >
+                                        <Button className="bg-primary text-light mx-1" size="small">
                                             <DeleteIcon /> Accept Request
                                         </Button>
-                                        <Button
-                                            className="bg-danger text-light mx-1"
-                                            size="small"
-                                        >
+                                        <Button className="bg-danger text-light mx-1" size="small">
                                             <DeleteIcon /> Remove Friend
                                         </Button>
                                     </div>

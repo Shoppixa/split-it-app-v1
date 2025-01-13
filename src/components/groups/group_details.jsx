@@ -38,8 +38,7 @@ const GroupDetails = () => {
     const [isVisibleAddExpense, setIsVisibleAddExpense] = useState(false) // Default: Hidden
     const [isVisibleAlert, setIsVisibleAlert] = useState(false) // Default: Hidden
     const [isVisibleCloseButton, setIsVisibleCloseButton] = useState(false) // Default: Hidden
-    const [isVisibleAddExpenseCloseButton, setIsVisibleAddExpenseCloseButton] =
-        useState(false) // Default: Hidden
+    const [isVisibleAddExpenseCloseButton, setIsVisibleAddExpenseCloseButton] = useState(false) // Default: Hidden
     const [addUserSuccess, setAddUserSuccess] = useState(null)
     const [addExpenseSuccess, setAddExpenseSuccess] = useState(null)
 
@@ -47,8 +46,7 @@ const GroupDetails = () => {
         e.preventDefault()
         handleCloseAddExpenseButtonClick()
         isVisibleUserSelect
-            ? (setIsVisibleAlert(true),
-              setAddUserSuccess(getRandomString('true', 'false')))
+            ? (setIsVisibleAlert(true), setAddUserSuccess(getRandomString('true', 'false')))
             : (setIsVisibleUserSelect(true), setIsVisibleCloseButton(true)) // Show the component
     }
     const handleCloseAlertButton = () => {
@@ -73,10 +71,8 @@ const GroupDetails = () => {
         e.preventDefault()
         handleCloseAddUserButtonClick()
         isVisibleAddExpense
-            ? (setIsVisibleAlert(true),
-              setAddExpenseSuccess(getRandomString('true', 'false')))
-            : (setIsVisibleAddExpense(true),
-              setIsVisibleAddExpenseCloseButton(true)) // Show the component
+            ? (setIsVisibleAlert(true), setAddExpenseSuccess(getRandomString('true', 'false')))
+            : (setIsVisibleAddExpense(true), setIsVisibleAddExpenseCloseButton(true)) // Show the component
     }
     return (
         <div>
@@ -85,21 +81,9 @@ const GroupDetails = () => {
                     Test Group 1
                 </Link>
             </h6>
-            <Stack
-                direction="row"
-                spacing={1}
-                className="justify-content-center"
-            >
-                <Chip
-                    label="Rs. 2384.45"
-                    color="success"
-                    className="shadow shadow-5"
-                />
-                <Chip
-                    label="Rs. 3453.34"
-                    color="warning"
-                    className="shadow shadow-5"
-                />
+            <Stack direction="row" spacing={1} className="justify-content-center">
+                <Chip label="Rs. 2384.45" color="success" className="shadow shadow-5" />
+                <Chip label="Rs. 3453.34" color="warning" className="shadow shadow-5" />
             </Stack>
 
             <div className="list-group shadow-5-strong my-2">
@@ -133,10 +117,7 @@ const GroupDetails = () => {
                                     {expense.amount}
                                 </Button>
                             ) : (
-                                <Button
-                                    className="bg-danger text-light"
-                                    style={{ cursor: 'text' }}
-                                >
+                                <Button className="bg-danger text-light" style={{ cursor: 'text' }}>
                                     {expense.amount}
                                 </Button>
                             )}
@@ -201,12 +182,7 @@ const GroupDetails = () => {
                 )}
 
                 {isVisibleUserSelect && (
-                    <Select
-                        className="my-2"
-                        options={options}
-                        isMulti
-                        closeMenuOnSelect={false}
-                    />
+                    <Select className="my-2" options={options} isMulti closeMenuOnSelect={false} />
                 )}
                 {isVisibleAddExpense && (
                     <div>
@@ -282,10 +258,7 @@ const GroupDetails = () => {
                                 </Link>
                             </div>
                         </div>
-                        <Button
-                            className="bg-danger text-light mx-2"
-                            size="small"
-                        >
+                        <Button className="bg-danger text-light mx-2" size="small">
                             <DeleteIcon /> Remove User
                         </Button>
                     </div>

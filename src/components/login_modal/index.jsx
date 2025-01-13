@@ -20,29 +20,25 @@ const LoginModal = (props) => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const dispatch = useDispatch()
-    const { message, isLoading, token, statusCode } = useSelector(
-        (state) => state.user
-    )
+    const { message, isLoading, token, statusCode } = useSelector((state) => state.user)
 
     const handleLogin = () => {
         try {
             dispatch(loginUser({ email, password }))
-        }
-        catch {
-            console.log("error");
+        } catch {
+            console.log('error')
         }
     }
 
     useEffect(() => {
         if (token) {
             props.handleCloseLoginModal()
-            toast.success(message || "Login Successful");
             const timer = setTimeout(() => {
                 navigate('/dashboard')
             }, 200)
             return () => clearTimeout(timer) // Cleanup timer on unmount
         }
-    }, [token]);
+    }, [token])
 
     const style = {
         position: 'absolute',
@@ -73,23 +69,13 @@ const LoginModal = (props) => {
                     <Box sx={style} className="loginModalBody">
                         <div className="d-flex flex-column mt-0">
                             <div className="text-center text-dark">
-                                <img
-                                    src={logo}
-                                    className="brandImage"
-                                    alt="logo"
-                                />
+                                <img src={logo} className="brandImage" alt="logo" />
                                 <h6 className="mt-4 pb-1 ">
-                                    Get access to your Orders, Wishlist and
-                                    Recommendations
+                                    Get access to your Orders, Wishlist and Recommendations
                                 </h6>
                             </div>
-                            <CustomMessage
-                                message={message}
-                                statusCode={statusCode}
-                            />
-                            <h6 className="mt-2 pb-1 text-dark text-center">
-                                Sign in with:
-                            </h6>
+                            <CustomMessage message={message} statusCode={statusCode} />
+                            <h6 className="mt-2 pb-1 text-dark text-center">Sign in with:</h6>
                             <div className="row d-flex justify-content-center">
                                 <Button
                                     className="m-1"
@@ -122,9 +108,7 @@ const LoginModal = (props) => {
                                     <GitHubIcon className="text-light" />
                                 </Button>
                             </div>
-                            <h6 className="text-dark mt-4">
-                                Login to your account
-                            </h6>
+                            <h6 className="text-dark mt-4">Login to your account</h6>
 
                             <TextField
                                 className="my-1 inputBox"
@@ -162,9 +146,7 @@ const LoginModal = (props) => {
                             </div>
 
                             <div className="d-flex flex-row align-items-center justify-content-center pb-4 my-2">
-                                <p className="mb-0 text-dark">
-                                    Don't have an account?
-                                </p>
+                                <p className="mb-0 text-dark">Don't have an account?</p>
                                 <Link to="/register">
                                     <Button variant="outlined" className="mx-2">
                                         Register

@@ -60,8 +60,7 @@ const ExpenseDetailsComponent = () => {
     const handleAddUserButtonClick = (e) => {
         e.preventDefault()
         isVisibleUserSelect
-            ? (setIsVisibleAlert(true),
-              setAddUserSuccess(getRandomString('true', 'false')))
+            ? (setIsVisibleAlert(true), setAddUserSuccess(getRandomString('true', 'false')))
             : (setIsVisibleUserSelect(true), setIsVisibleCloseButton(true)) // Show the component
     }
     const handleCloseAlertButton = () => {
@@ -136,12 +135,7 @@ const ExpenseDetailsComponent = () => {
                 )}
 
                 {isVisibleUserSelect && (
-                    <Select
-                        className="my-2"
-                        options={options}
-                        isMulti
-                        closeMenuOnSelect={false}
-                    />
+                    <Select className="my-2" options={options} isMulti closeMenuOnSelect={false} />
                 )}
                 <Button
                     className="bg-primary text-light mx-2 px-3 my-2"

@@ -8,9 +8,7 @@ import { verifyOtp } from '../../store/userSlice.js'
 import { useNavigate } from 'react-router-dom'
 
 const VerifyOTPForm = () => {
-    const { message, isLoading, user_email, token, statusCode } = useSelector(
-        (state) => state.user
-    )
+    const { message, isLoading, user_email, token, statusCode } = useSelector((state) => state.user)
     const [otp, setOtp] = useState(null)
     const dispatch = useDispatch()
     const navigate = useNavigate()
@@ -29,23 +27,13 @@ const VerifyOTPForm = () => {
         <div className="container">
             <div className="row justify-content-center">
                 <div className="col-md-6 justify-content-center">
-                    <h3 className="text-center fw-bolder mt-2 mb-2">
-                        Verify Email
-                    </h3>
+                    <h3 className="text-center fw-bolder mt-2 mb-2">Verify Email</h3>
                     <h6 className="text-center">
-                        Experience the freedom of collaborative expense
-                        management.
+                        Experience the freedom of collaborative expense management.
                     </h6>
-                    <div
-                        className="row justify-content-center"
-                        style={{ marginTop: '30px' }}
-                    >
+                    <div className="row justify-content-center" style={{ marginTop: '30px' }}>
                         <CustomMessage
-                            message={
-                                token
-                                    ? 'Verification successful.'
-                                    : message
-                            }
+                            message={token ? 'Verification successful.' : message}
                             statusCode={statusCode}
                         />
                         <div className="row justify-content-center">
@@ -69,7 +57,7 @@ const VerifyOTPForm = () => {
                                     variant="contained"
                                     type="submit"
                                     className="my-4 btn-outline-primary"
-                                    style={{ 'maxWidth': '25%' }}
+                                    style={{ maxWidth: '25%' }}
                                     onClick={handleVerify}
                                     disabled={isLoading}
                                 >

@@ -1,5 +1,5 @@
-import axios from "axios";
-import { baseURL } from "../common/SummaryApi";
+import axios from 'axios'
+import { baseURL } from '../common/SummaryApi'
 
 const Axios = axios.create({
     baseURL: baseURL,
@@ -20,10 +20,10 @@ Axios.interceptors.request.use(
     },
     (error) => {
         return Promise.reject(error)
-    }
+    },
 )
 
-//extend the life span of access token with 
+//extend the life span of access token with
 // the help refresh
 // Axios.interceptors.request.use(
 //     (response) => {
@@ -45,7 +45,6 @@ Axios.interceptors.request.use(
 //         return Promise.reject(error)
 //     }
 // )
-
 
 // const refreshAccessToken = async (refreshToken) => {
 //     try {
