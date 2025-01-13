@@ -37,10 +37,7 @@ const GroupList = () => {
                                 <p className="mb-1">{group.name}</p>
                             </div>
                         </div>
-                        <Link
-                            to={`/group/${group.id}`}
-                            className="text-decoration-none"
-                        >
+                        <Link to={`/group/${group.id}`} className="text-decoration-none">
                             View
                         </Link>
                     </div>

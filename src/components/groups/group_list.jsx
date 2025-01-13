@@ -23,8 +23,7 @@ const GroupList = () => {
     const handleAddGroupButtonClick = (e) => {
         e.preventDefault()
         isVisibleAddGroup
-            ? (setIsVisibleAlert(true),
-              setAddGroupSuccess(getRandomString('true', 'false')))
+            ? (setIsVisibleAlert(true), setAddGroupSuccess(getRandomString('true', 'false')))
             : (setIsVisibleAddGroup(true), setIsVisibleCloseButton(true)) // Show the component
     }
 
@@ -75,10 +74,7 @@ const GroupList = () => {
                             </div>
                         </div>
 
-                        <Link
-                            to={`/group/${group.id}`}
-                            className="text-decoration-none"
-                        >
+                        <Link to={`/group/${group.id}`} className="text-decoration-none">
                             View
                         </Link>
                     </div>

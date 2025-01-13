@@ -57,17 +57,17 @@ function AppNavbar() {
     }
 
     const handleLogout = async () => {
-        await dispatch(logout());
-        await persistor.purge();
-        await persistor.flush();
-        toast.success('Logged out successfully');
-    };
+        await dispatch(logout())
+        await persistor.purge()
+        await persistor.flush()
+        toast.success('Logged out successfully')
+    }
 
     useEffect(() => {
         if (!token) {
-            navigate('/'); // Redirect if user is logged out
+            navigate('/') // Redirect if user is logged out
         }
-    }, [token, navigate]);
+    }, [token, navigate])
 
     return (
         <>
@@ -102,17 +102,10 @@ function AppNavbar() {
                                 px: 0,
                             }}
                         >
-                            <Link
-                                to="/"
-                                className="d-flex logoLink align-items-center"
-                            >
-                                <ReceiptLongIcon
-                                    className="logo"
-                                    fontSize={'large'}
-                                />
+                            <Link to="/" className="d-flex logoLink align-items-center">
+                                <ReceiptLongIcon className="logo" fontSize={'large'} />
                                 <h4 className="logoText" style={logoStyle}>
-                                    {import.meta.env.VITE_APP_TITLE ||
-                                        'ECOM App'}
+                                    {import.meta.env.VITE_APP_TITLE || 'ECOM App'}
                                 </h4>
                             </Link>
                             <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
@@ -121,10 +114,7 @@ function AppNavbar() {
                                         key={pages.indexOf(page)}
                                         sx={{ py: '6px', px: '12px' }}
                                     >
-                                        <Typography
-                                            variant="body2"
-                                            color="text.primary"
-                                        >
+                                        <Typography variant="body2" color="text.primary">
                                             <Link
                                                 to={page.url}
                                                 className="text-decoration-none text-dark"
@@ -192,11 +182,7 @@ function AppNavbar() {
                             >
                                 <MenuIcon />
                             </Button>
-                            <Drawer
-                                anchor="right"
-                                open={open}
-                                onClose={toggleDrawer(false)}
-                            >
+                            <Drawer anchor="right" open={open} onClose={toggleDrawer(false)}>
                                 <Box
                                     sx={{
                                         minWidth: '60dvw',
@@ -214,11 +200,8 @@ function AppNavbar() {
                                         }}
                                     ></Box>
                                     {pages.map((page, index) => (
-                                        <MenuItem key={index}>
-                                            {page.name}
-                                        </MenuItem>
-                                    )
-                                    )}
+                                        <MenuItem key={index}>{page.name}</MenuItem>
+                                    ))}
                                     <Divider />
                                     {isLoggedIn ? (
                                         <>
@@ -244,9 +227,7 @@ function AppNavbar() {
                                                     component="a"
                                                     target="_blank"
                                                     sx={{ width: '100%' }}
-                                                    onClick={
-                                                        handleOpenLoginModal
-                                                    }
+                                                    onClick={handleOpenLoginModal}
                                                 >
                                                     Sign in
                                                 </Button>
@@ -258,9 +239,7 @@ function AppNavbar() {
                                                     component="a"
                                                     target="_blank"
                                                     sx={{ width: '100%' }}
-                                                    onClick={
-                                                        handleOpenRegisterModal
-                                                    }
+                                                    onClick={handleOpenRegisterModal}
                                                 >
                                                     Sign up
                                                 </Button>

@@ -50,10 +50,7 @@ const MyExpensesList = () => {
                                     {expense.amount}
                                 </Button>
                             ) : (
-                                <Button
-                                    className="bg-danger text-light"
-                                    style={{ cursor: 'text' }}
-                                >
+                                <Button className="bg-danger text-light" style={{ cursor: 'text' }}>
                                     {expense.amount}
                                 </Button>
                             )}

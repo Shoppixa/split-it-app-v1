@@ -15,28 +15,25 @@ const LoginForm = () => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const dispatch = useDispatch()
-    const { message, isLoading, token, statusCode } = useSelector(
-        (state) => state.user
-    )
+    const { message, isLoading, token, statusCode } = useSelector((state) => state.user)
 
     const handleLogin = () => {
         try {
             dispatch(loginUser({ email, password }))
-        }
-        catch {
-            console.log("error");
+        } catch {
+            console.log('error')
         }
     }
 
     useEffect(() => {
         if (token) {
-            toast.success(message || "Login Successful");
+            toast.success(message || 'Login Successful')
             const timer = setTimeout(() => {
                 navigate('/dashboard')
             }, 200)
             return () => clearTimeout(timer) // Cleanup timer on unmount
         }
-    }, [token]);
+    }, [token])
 
     return (
         <div className="container">
@@ -44,17 +41,10 @@ const LoginForm = () => {
                 <div className="col-md-6 justify-content-center">
                     <h3 className="text-center fw-bolder mt-2 mb-2">Login </h3>
                     <h6 className="text-center">
-                        Experience the freedom of collaborative expense
-                        management.
+                        Experience the freedom of collaborative expense management.
                     </h6>
-                    <CustomMessage
-                        message={message}
-                        statusCode={statusCode}
-                    />
-                    <div
-                        className="row justify-content-center"
-                        style={{ marginTop: '30px' }}
-                    >
+                    <CustomMessage message={message} statusCode={statusCode} />
+                    <div className="row justify-content-center" style={{ marginTop: '30px' }}>
                         <div className="row justify-content-center">
                             <TextField
                                 className="my-2"

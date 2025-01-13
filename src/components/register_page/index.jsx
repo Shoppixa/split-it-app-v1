@@ -17,45 +17,36 @@ const RegisterForm = () => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const dispatch = useDispatch()
-    const { message, isLoading, user_email, statusCode } = useSelector(
-        (state) => state.user
-    )
+    const { message, isLoading, user_email, statusCode } = useSelector((state) => state.user)
 
     const handleRegister = () => {
         try {
             dispatch(registerUser({ name, email, password }))
-        }
-        catch {
-            console.log("error");
+        } catch {
+            console.log('error')
         }
     }
 
     useEffect(() => {
         if (message && user_email) {
-            toast.success("Account Created Successfully");
+            toast.success('Account Created Successfully')
             const timer = setTimeout(() => {
                 navigate('/verify-otp')
             }, 200)
             return () => clearTimeout(timer) // Cleanup timer on unmount
         }
-    }, [message, user_email]);
+    }, [message, user_email])
 
     return (
         <div className="container">
             <div className="row justify-content-center">
                 <div className="col-md-6 justify-content-center">
-                    <h3 className="text-center fw-bolder mt-1 mb-1">
-                        Register
-                    </h3>
+                    <h3 className="text-center fw-bolder mt-1 mb-1">Register</h3>
                     <h6 className="text-center">
-                        Experience the freedom of collaborative expense
-                        management.
+                        Experience the freedom of collaborative expense management.
                     </h6>
                     <div className="row justify-content-center">
-                        <CustomMessage
-                            message={message}
-                            statusCode={statusCode}
-                        />
+                        <CustomMessage message={message} statusCode={statusCode} />
                         <div className="row justify-content-center">
                             <TextField
                                 className="my-1"
@@ -103,7 +94,7 @@ const RegisterForm = () => {
                                     variant="contained"
                                     type="submit"
                                     className="my-4 btn-outline-primary"
-                                    style={{ 'maxWidth': '25%' }}
+                                    style={{ maxWidth: '25%' }}
                                     onClick={handleRegister}
                                     disabled={isLoading}
                                 >

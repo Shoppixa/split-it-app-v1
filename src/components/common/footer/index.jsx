@@ -13,11 +13,7 @@ function Copyright() {
     return (
         <Typography variant="body2" mt={1}>
             {'Copyright © '}
-            <Link
-                href="https://mui.com/"
-                sx={{ textDecoration: 'none' }}
-                className="text-light"
-            >
+            <Link href="https://mui.com/" sx={{ textDecoration: 'none' }} className="text-light">
                 {import.meta.env.VITE_APP_TITLE || 'ECOM App'}.com&nbsp;
             </Link>
             {new Date().getFullYear()}
@@ -31,69 +27,31 @@ export default function Footer() {
             <div className="bg-dark text-white">
                 <div className="container p-3 pb-1">
                     <section className="d-flex justify-content-center mb-3">
-                        <p
-                            color="light"
-                            className="btn-outline-dark m-1"
-                            href="#!"
-                            role="button"
-                        >
+                        <p color="light" className="btn-outline-dark m-1" href="#!" role="button">
                             <GoogleIcon />
                         </p>
-                        <p
-                            color="light"
-                            className="btn-outline-dark m-1"
-                            href="#!"
-                            role="button"
-                        >
+                        <p color="light" className="btn-outline-dark m-1" href="#!" role="button">
                             <FacebookIcon />
                         </p>
-                        <p
-                            color="light"
-                            className="btn-outline-dark m-1"
-                            href="#!"
-                            role="button"
-                        >
+                        <p color="light" className="btn-outline-dark m-1" href="#!" role="button">
                             <InstagramIcon />
                         </p>
-                        <p
-                            color="light"
-                            className="btn-outline-dark m-1"
-                            href="#!"
-                            role="button"
-                        >
+                        <p color="light" className="btn-outline-dark m-1" href="#!" role="button">
                             <YouTubeIcon />
                         </p>
-                        <p
-                            color="light"
-                            className="btn-outline-dark m-1"
-                            href="#!"
-                            role="button"
-                        >
+                        <p color="light" className="btn-outline-dark m-1" href="#!" role="button">
                             <LinkedInIcon />
                         </p>
-                        <p
-                            color="light"
-                            className="btn-outline-dark m-1"
-                            href="#!"
-                            role="button"
-                        >
+                        <p color="light" className="btn-outline-dark m-1" href="#!" role="button">
                             <GitHubIcon />
                         </p>
-                        <p
-                            color="light"
-                            className="btn-outline-dark m-1"
-                            href="#!"
-                            role="button"
-                        >
+                        <p color="light" className="btn-outline-dark m-1" href="#!" role="button">
                             <XIcon />
                         </p>
                     </section>
                 </div>
 
-                <div
-                    className="text-center p-3"
-                    style={{ backgroundColor: 'rgba(0, 0, 0, 0.2)' }}
-                >
+                <div className="text-center p-3" style={{ backgroundColor: 'rgba(0, 0, 0, 0.2)' }}>
                     <Copyright />
                 </div>
             </div>

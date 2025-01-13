@@ -7,7 +7,7 @@ import { resetMessages } from '../../../store/userSlice.js'
 const CustomMessage = ({ message, statusCode }) => {
     const dispatch = useDispatch()
     const success_status_code_list = [200, 201]
-    const severity = success_status_code_list.includes(statusCode) ? 'success' : 'error';
+    const severity = success_status_code_list.includes(statusCode) ? 'success' : 'error'
 
     useEffect(() => {
         if (message) {

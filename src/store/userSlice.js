@@ -4,73 +4,71 @@ import Axios from '../utils/Axios.js'
 import { cleanErrorMessage } from '../utils/helpers.js'
 import { AxiosToastError } from '../utils/AxiosToastError.js'
 
-export const registerUser = createAsyncThunk(
-    'registerUser',
-    async (userData, thunkAPI) => {
-        const payload = {
-            fname: userData['name'].split(' ')[0],
-            lname: userData['name'].split(' ')[1],
-            email: userData['email'],
-            password: userData['password'],
-        }
-        try {
-            const response = await Axios({
-                ...SummaryApi.register,
-                data: payload,
-            });
-            return { message: response.data.message, statusCode: response.status };
-        } catch (error) {
-            const errorPayload = AxiosToastError(error);
-            return thunkAPI.rejectWithValue({ message: cleanErrorMessage(errorPayload.message), statusCode: error.status });
-        }
+export const registerUser = createAsyncThunk('registerUser', async (userData, thunkAPI) => {
+    const payload = {
+        fname: userData['name'].split(' ')[0],
+        lname: userData['name'].split(' ')[1],
+        email: userData['email'],
+        password: userData['password'],
     }
-)
-export const verifyOtp = createAsyncThunk(
-    'verifyOtp',
-    async ({ user_email, otp }, thunkAPI) => {
-        try {
-            let otpData = {
-                email: user_email,
-                otp: otp,
-            }
-            const response = await Axios(
-                {
-                    ...SummaryApi.verify_otp,
-                    data: otpData
-                }
-            )
-            return {
-                access_token: response.data.token?.access,
-                refresh: response.data.token?.refresh,
-                message: response.data.message,
-                statusCode: response.status
-            }
-        } catch (error) {
-            const errorPayload = AxiosToastError(error);
-            return thunkAPI.rejectWithValue({ message: cleanErrorMessage(errorPayload.message), statusCode: error.status });
-        }
+    try {
+        const response = await Axios({
+            ...SummaryApi.register,
+            data: payload,
+        })
+        return { message: response.data.message, statusCode: response.status }
+    } catch (error) {
+        const errorPayload = AxiosToastError(error)
+        return thunkAPI.rejectWithValue({
+            message: cleanErrorMessage(errorPayload.message),
+            statusCode: error.status,
+        })
     }
-)
-export const loginUser = createAsyncThunk(
-    'login',
-    async (userData, thunkAPI) => {
-        try {
-            const response = await Axios({
-                ...SummaryApi.login,
-                data: userData,
-            })
-            return {
-                message: response.data.message,
-                token: response.data.token?.access,
-                refresh: response.data.token?.refresh,
-                statusCode: response.status // Include token if login is successful
-            }
-        } catch (error) {
-            const errorPayload = AxiosToastError(error);
-            return thunkAPI.rejectWithValue({ message: cleanErrorMessage(errorPayload.message), statusCode: error.status });
+})
+export const verifyOtp = createAsyncThunk('verifyOtp', async ({ user_email, otp }, thunkAPI) => {
+    try {
+        let otpData = {
+            email: user_email,
+            otp: otp,
         }
+        const response = await Axios({
+            ...SummaryApi.verify_otp,
+            data: otpData,
+        })
+        return {
+            access_token: response.data.token?.access,
+            refresh: response.data.token?.refresh,
+            message: response.data.message,
+            statusCode: response.status,
+        }
+    } catch (error) {
+        const errorPayload = AxiosToastError(error)
+        return thunkAPI.rejectWithValue({
+            message: cleanErrorMessage(errorPayload.message),
+            statusCode: error.status,
+        })
     }
-)
+})
+export const loginUser = createAsyncThunk('login', async (userData, thunkAPI) => {
+    try {
+        const response = await Axios({
+            ...SummaryApi.login,
+            data: userData,
+        })
+        return {
+            message: response.data.message,
+            token: response.data.token?.access,
+            refresh: response.data.token?.refresh,
+            statusCode: response.status, // Include token if login is successful
+        }
+    } catch (error) {
+        const errorPayload = AxiosToastError(error)
+        return thunkAPI.rejectWithValue({
+            message: cleanErrorMessage(errorPayload.message),
+            statusCode: error.status,
+        })
+    }
+})
 
 const initialValue = {
     user_email: null,
@@ -110,9 +108,7 @@ const userSlice = createSlice({
                 state.statusCode = action.payload?.statusCode
             })
             .addCase(registerUser.fulfilled, (state, action) => {
-                state.user_email = action.payload.message
-                    ? action.meta.arg.email
-                    : null
+                state.user_email = action.payload.message ? action.meta.arg.email : null
                 state.isLoading = false
                 state.message = action.payload.message
                 state.message = action.payload.message

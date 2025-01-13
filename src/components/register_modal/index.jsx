@@ -22,29 +22,26 @@ const RegisterModal = ({ openRegisterModal, handleCloseRegisterModal }) => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const dispatch = useDispatch()
-    const { message, isLoading, user_email, statusCode } = useSelector(
-        (state) => state.user
-    )
+    const { message, isLoading, user_email, statusCode } = useSelector((state) => state.user)
 
     const handleRegister = () => {
         try {
             dispatch(registerUser({ name, email, password }))
-        }
-        catch {
-            console.log("error");
+        } catch {
+            console.log('error')
         }
     }
 
     useEffect(() => {
         if (message && user_email) {
-            toast.success("Account Created Successfully");
-            handleCloseRegisterModal();
+            toast.success('Account Created Successfully')
+            handleCloseRegisterModal()
             const timer = setTimeout(() => {
                 navigate('/verify-otp')
             }, 200)
             return () => clearTimeout(timer) // Cleanup timer on unmount
         }
-    }, [message, user_email]);
+    }, [message, user_email])
 
     const style = {
         position: 'absolute',
@@ -75,24 +72,14 @@ const RegisterModal = ({ openRegisterModal, handleCloseRegisterModal }) => {
                     <Box sx={style} className="registerModalBody">
                         <div className="d-flex flex-column mt-0">
                             <div className="text-center text-dark">
-                                <img
-                                    src={logo}
-                                    className="brandImage"
-                                    alt="logo"
-                                />
+                                <img src={logo} className="brandImage" alt="logo" />
                                 <h6 className="mt-4 pb-1 ">
-                                    Say goodbye to the complexities of splitting
-                                    bills.
+                                    Say goodbye to the complexities of splitting bills.
                                 </h6>
                             </div>
-                            <h6 className="mt-2 pb-1 text-dark text-center">
-                                Sign up with:
-                            </h6>
+                            <h6 className="mt-2 pb-1 text-dark text-center">Sign up with:</h6>
                             <div className="row d-flex justify-content-center">
-                                <CustomMessage
-                                    message={message}
-                                    statusCode={statusCode}
-                                />
+                                <CustomMessage message={message} statusCode={statusCode} />
                                 <Button
                                     className="m-1"
                                     style={{
@@ -124,9 +111,7 @@ const RegisterModal = ({ openRegisterModal, handleCloseRegisterModal }) => {
                                     <GitHubIcon className="text-light" />
                                 </Button>
                             </div>
-                            <h6 className="text-dark mt-4">
-                                Register your account
-                            </h6>
+                            <h6 className="text-dark mt-4">Register your account</h6>
 
                             <TextField
                                 className="my-1 inputBox"
@@ -161,20 +146,20 @@ const RegisterModal = ({ openRegisterModal, handleCloseRegisterModal }) => {
                             <div className="text-center pt-1 mb-2 pb-1">
                                 {isLoading ? (
                                     <Loader></Loader>
-                                ) : (<Button
-                                    variant="contained"
-                                    className="my-4 w-100"
-                                    onClick={handleRegister}
-                                    disabled={isLoading}
-                                >
-                                    Sign Up
-                                </Button>)}
+                                ) : (
+                                    <Button
+                                        variant="contained"
+                                        className="my-4 w-100"
+                                        onClick={handleRegister}
+                                        disabled={isLoading}
+                                    >
+                                        Sign Up
+                                    </Button>
+                                )}
                             </div>
 
                             <div className="d-flex flex-row align-items-center justify-content-center pb-4 my-2">
-                                <p className="mb-0 text-dark">
-                                    Already have an account?
-                                </p>
+                                <p className="mb-0 text-dark">Already have an account?</p>
                                 <Link to="/login">
                                     <Button variant="outlined" className="mx-2">
                                         Login
