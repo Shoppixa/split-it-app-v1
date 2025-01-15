@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import SummaryApi from '../common/SummaryApi.js'
 import Axios from '../utils/Axios.js'
-import { cleanErrorMessage } from '../utils/helpers.js'
+import { cleanErrorMessage } from '../utils/clearErrorMessage.js'
 import { AxiosToastError } from '../utils/AxiosToastError.js'
 import toast from 'react-hot-toast'
 
@@ -17,7 +17,12 @@ export const registerUser = createAsyncThunk('registerUser', async (userData, th
             ...SummaryApi.register,
             data: payload,
         })
-        return { message: response.data.message, statusCode: response.status }
+        return {
+            message: response.data.message,
+            statusCode: response.status,
+            token: response.data.token?.access,
+            refresh: response.data.token?.refresh,
+        }
     } catch (error) {
         const errorPayload = AxiosToastError(error)
         return thunkAPI.rejectWithValue({
@@ -117,6 +122,7 @@ const userSlice = createSlice({
                     ? cleanErrorMessage(action.payload.message)
                     : null
                 state.statusCode = action.payload.statusCode
+                localStorage.setItem('accessToken', action.payload.token)
                 toast.success(action.payload.message || 'Account Created Successfully')
             })
             .addCase(verifyOtp.pending, (state) => {
@@ -130,7 +136,8 @@ const userSlice = createSlice({
             })
             .addCase(verifyOtp.fulfilled, (state, action) => {
                 state.isLoading = false
-                state.token = action.payload.access_token || null
+                state.token = action.payload.token || null
+                localStorage.setItem('accessToken', action.payload.token)
                 state.refresh_token = action.payload.refresh || null
                 state.message = action.payload.message
                 state.isLoggedIn = true
@@ -153,10 +160,11 @@ const userSlice = createSlice({
                 state.isLoading = false
                 state.isLoggedIn = true
                 state.token = action.payload.token || null
+                localStorage.setItem('accessToken', action.payload.token)
                 state.message = action.payload.message
                 state.message = action.payload.message
                 state.statusCode = action.payload.statusCode
-                toast.error(action.payload.message || 'Login Successful')
+                toast.success(action.payload.message || 'Login Successful')
             })
     },
 })

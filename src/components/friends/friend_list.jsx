@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 import Button from '@mui/material/Button'
 import DeleteIcon from '@mui/icons-material/Delete'
+import { SearchHeader } from '../common/searchHeader'
 
 const FriendList = () => {
     const friends = [
@@ -16,16 +17,15 @@ const FriendList = () => {
                     My Friends
                 </Link>
             </h6>
+            <SearchHeader />
             <div className="list-group shadow-5-strong my-2">
                 {friends.map((friend) => (
                     <div
                         key={friend.value}
-                        className="list-group-item border-0 d-flex justify-content-between align-items-center shadow mb-2"
-                    >
+                        className="list-group-item border-0 d-flex justify-content-between align-items-center shadow mb-2">
                         <Link
                             to={`/user/${friend.value}`}
-                            className="d-flex align-items-center text-decoration-none text-dark"
-                        >
+                            className="d-flex align-items-center text-decoration-none text-dark">
                             <img
                                 src="https://mdbootstrap.com/img/new/avatars/8.jpg"
                                 alt=""

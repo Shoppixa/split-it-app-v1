@@ -9,7 +9,7 @@ import { useNavigate } from 'react-router-dom'
 
 const VerifyOTPForm = () => {
     const { message, isLoading, user_email, token, statusCode } = useSelector((state) => state.user)
-    const [otp, setOtp] = useState(null)
+    const [otp, setOtp] = useState('')
     const dispatch = useDispatch()
     const navigate = useNavigate()
     const handleVerify = () => {
