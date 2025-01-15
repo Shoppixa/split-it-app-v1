@@ -8,7 +8,6 @@ import { useEffect } from 'react'
 const DashboardMainContent = () => {
     const dispatch = useDispatch()
     useEffect(() => {
-        console.log('User Details by ID');
         dispatch(userDetailsbyID())
     }, [])
     return (

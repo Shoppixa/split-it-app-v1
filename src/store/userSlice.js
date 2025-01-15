@@ -77,8 +77,6 @@ export const loginUser = createAsyncThunk('login', async (userData, thunkAPI) =>
 })
 
 export const userDetailsbyID = createAsyncThunk('userDetailsID', async (userData, thunkAPI) => {
-    console.log('User Details by ID called')
-
     try {
         const response = await Axios({
             ...SummaryApi.getUserByID,

@@ -16,14 +16,12 @@ function FriendSearch() {
         try {
             const response = await Axios({ ...SummaryApi.friendSearch })
             setResults(response.data.data.user_list)
-            // console.log('Search Results:', response.data.data.friend_list)
         } catch (error) {
             console.error(error)
         }
     }
 
     useEffect(() => {
-        console.log('reults', results)
         if (searchQuery) {
             fetchSearchResults()
         }
