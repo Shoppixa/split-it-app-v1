@@ -1,157 +1,180 @@
-import Button from '@mui/material/Button'
-import { Input, TextField } from '@mui/material'
-import CloudUploadIcon from '@mui/icons-material/CloudUpload'
-import { DatePicker, LocalizationProvider } from '@mui/x-date-pickers'
+import React, { useState } from 'react'
+import { Box, Button, TextField, Typography, Container, Paper, Avatar, Stack } from '@mui/material'
+import { DatePicker } from '@mui/x-date-pickers/DatePicker'
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider'
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
-import DeleteIcon from '@mui/icons-material/Delete.js'
+import CloudUploadIcon from '@mui/icons-material/CloudUpload'
+import DeleteIcon from '@mui/icons-material/Delete'
+import dayjs from 'dayjs'
+import { useSelector } from 'react-redux'
 
 const ProfileDetails = () => {
-    const friends = [
-        { value: 'Test User 1', label: 'Test User 1' },
-        { value: 'Test User 2', label: 'Test User 2' },
-        { value: 'Test User 3', label: 'Test User 3' },
-        { value: 'Test User 4', label: 'Test User 4' },
-    ]
+    const { userDetails } = useSelector((state) => state.user)
+    const [name, setName] = useState(userDetails.fname + ' ' + userDetails.lname)
+    const [email, setEmail] = useState(userDetails.email)
+    const [phNumber, setPhNumber] = useState(userDetails.phone)
+
     return (
-        <div>
-            <h6 className="p-2 my-3 shadow text-center fw-bolder rounded-4">
-                <div className="text-decoration-none text-dark">My Profile</div>
-            </h6>
+        <Container maxWidth="lg">
+            <Box sx={{ my: 1.5 }}>
+                {/* Profile Header */}
+                <Paper
+                    elevation={3}
+                    sx={{
+                        p: 1.5,
+                        mb: 2,
+                        borderRadius: 2,
+                        textAlign: 'center',
+                    }}>
+                    <Typography variant="h6" sx={{ mb: 1, fontWeight: 'bold' }}>
+                        My Profile
+                    </Typography>
+                </Paper>
 
-            <div className="d-flex justify-content-center align-items-center p-2 shadow shadow-5 rounded-4">
-                <div className="m-2">
-                    <img
-                        src="https://mdbootstrap.com/img/new/avatars/15.jpg"
-                        alt=""
-                        style={{ width: '100px', height: '100px' }}
-                        className="rounded-circle ms-0"
-                    />
-                </div>
-                <div>
-                    <Button
-                        className="mx-2"
-                        component="label"
-                        role={undefined}
-                        variant="contained"
-                        tabIndex={-1}
-                        size="small"
-                        style={{ maxWidth: '200px' }}
-                        startIcon={<CloudUploadIcon />}
-                    >
-                        Upload
-                        <Input
-                            hidden
-                            type="file"
-                            onChange={(event) => console.log(event.target.files)}
-                            multiple
-                        />
-                    </Button>
-                    <Button
-                        className="mx-2"
-                        component="label"
-                        role={undefined}
-                        variant="contained"
-                        tabIndex={-1}
-                        size="small"
-                        style={{ maxWidth: '200px' }}
-                        startIcon={<CloudUploadIcon />}
-                    >
-                        Remove
-                        <Input
-                            hidden
-                            type="file"
-                            onChange={(event) => console.log(event.target.files)}
-                            multiple
-                        />
-                    </Button>
-                </div>
-            </div>
-            <div className="my-2 p-2 p-2 shadow shadow-5 rounded-4">
-                <h6 className="text-center">
-                    <p className="text-dark">Account Details</p>
-                </h6>
+                {/* Account Details Section */}
+                <Paper
+                    elevation={3}
+                    sx={{
+                        p: { xs: 2, sm: 2.5 },
+                        mb: 2,
+                        borderRadius: 2,
+                    }}>
+                    <Typography variant="h6" sx={{ mb: 2, textAlign: 'center' }}>
+                        Account Details
+                    </Typography>
 
-                <div className="row justify-content-center">
-                    <div className="col-6">
-                        <div>
-                            <p>Name</p>
-                            <TextField
-                                id="outlined-basic"
-                                label="Koushik Mallik"
-                                variant="outlined"
-                                className="mb-4"
+                    <Box
+                        component="form"
+                        sx={{
+                            display: 'flex',
+                            flexDirection: { xs: 'column', sm: 'row' },
+                            justifyContent: 'center',
+                            alignItems: 'center',
+                            gap: 1,
+                            maxWidth: '100%',
+                            width: '100%',
+                            mx: 'auto',
+                            mb: 2,
+                        }}>
+                        <Avatar
+                            src={
+                                userDetails.image ||
+                                'https://mdbootstrap.com/img/new/avatars/15.jpg'
+                            }
+                            sx={{ width: 80, height: 80 }}
+                        />
+                        <Box
+                            sx={{
+                                display: 'flex',
+                                gap: 1,
+                                flexDirection: { xs: 'column', sm: 'row' },
+                                width: { xs: '100%', sm: 'auto' },
+                            }}>
+                            <Button
+                                variant="contained"
+                                sx={{ height: 36 }}
+                                startIcon={<CloudUploadIcon />}
+                                component="label"
                                 size="small"
-                            />
-                            <p>Email</p>
-                            <TextField
-                                id="outlined-basic"
-                                label="abcd@gmail.com"
-                                variant="outlined"
-                                type="email"
-                                className="mb-4"
+                                fullWidth>
+                                Upload
+                                <input
+                                    hidden
+                                    type="file"
+                                    onChange={(event) => console.log(event.target.files)}
+                                />
+                            </Button>
+
+                            <Button
+                                sx={{
+                                    height: 36,
+                                }}
+                                variant="contained"
+                                startIcon={<DeleteIcon />}
                                 size="small"
-                            />
-                            <p>Date Of Birth</p>
-                            <LocalizationProvider dateAdapter={AdapterDayjs}>
-                                <DatePicker label="10/04/2003" className="mb-4" size="small" />
-                            </LocalizationProvider>
-                            <p>Phone Number</p>
-                            <TextField
-                                id="outlined-basic"
-                                label="+91 9876543210"
-                                variant="outlined"
-                                className="mb-4"
-                                size="small"
-                            />
-                        </div>
-                        <Button variant="contained" className="mb-3">
+                                fullWidth>
+                                Remove
+                            </Button>
+                        </Box>
+                    </Box>
+
+                    <Box
+                        component="form"
+                        sx={{
+                            display: 'flex',
+                            flexDirection: 'column',
+                            width: '100%',
+                            maxWidth: { xs: '100%', sm: '500px' },
+                            mx: 'auto',
+                            '& .MuiTextField-root': { mb: 2 },
+                        }}>
+                        {/* First row with Name and Email */}
+                        <Box
+                            sx={{
+                                display: 'flex',
+                                gap: 2,
+                                flexDirection: { xs: 'column', sm: 'row' },
+                            }}>
+                            <Box sx={{ flex: 1 }}>
+                                <Typography variant="body1" sx={{ mb: 0.5 }}>
+                                    Name
+                                </Typography>
+                                <TextField fullWidth size="small" value={name} />
+                            </Box>
+                            <Box sx={{ flex: 1 }}>
+                                <Typography variant="body1" sx={{ mb: 0.5 }}>
+                                    Email
+                                </Typography>
+                                <TextField fullWidth size="small" type="email" value={email} />
+                            </Box>
+                        </Box>
+
+                        {/* Second row with Date of Birth and Phone Number */}
+                        <Box
+                            sx={{
+                                display: 'flex',
+                                gap: 2,
+                                flexDirection: { xs: 'column', sm: 'row' },
+                                mt: 1,
+                            }}>
+                            <Box sx={{ flex: 1 }}>
+                                <Typography variant="body1" sx={{ mb: 0.5 }}>
+                                    Date of Birth
+                                </Typography>
+                                <LocalizationProvider dateAdapter={AdapterDayjs}>
+                                    <DatePicker
+                                        defaultValue={dayjs(new Date())}
+                                        slotProps={{
+                                            textField: {
+                                                size: 'small',
+                                                fullWidth: true,
+                                            },
+                                        }}
+                                    />
+                                </LocalizationProvider>
+                            </Box>
+                            <Box sx={{ flex: 1 }}>
+                                <Typography variant="body1" sx={{ mb: 0.5 }}>
+                                    Phone Number
+                                </Typography>
+                                <TextField fullWidth size="small" value={phNumber || ''} />
+                            </Box>
+                        </Box>
+
+                        <Button
+                            variant="contained"
+                            sx={{
+                                mt: 3,
+                                width: { xs: '100%', sm: 'auto' },
+                                alignSelf: { sm: 'flex-end' },
+                            }}>
                             Save Details
                         </Button>
-                    </div>
-                </div>
-            </div>
-            <div className="my-2 p-2 p-2 shadow shadow-5 rounded-4">
-                <h6 className="text-center">
-                    <p className="text-dark">Friend Requests</p>
-                </h6>
-
-                <div className="row justify-content-center">
-                    <div className="col-8">
-                        <div className="list-group my-2">
-                            {friends.map((friend) => (
-                                <div
-                                    key={friend.value}
-                                    className="list-group-item border-0 d-flex justify-content-between align-items-center shadow mb-2"
-                                >
-                                    <div className="d-flex align-items-center">
-                                        <img
-                                            src="https://mdbootstrap.com/img/new/avatars/8.jpg"
-                                            alt=""
-                                            style={{
-                                                width: '45px',
-                                                height: '45px',
-                                            }}
-                                            className="rounded-circle ms-0"
-                                        />
-                                        <div className="ms-3">
-                                            <p className="mb-1">{friend.label}</p>
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <Button className="bg-primary text-light mx-1" size="small">
-                                            <DeleteIcon /> Accept Request
-                                        </Button>
-                                        <Button className="bg-danger text-light mx-1" size="small">
-                                            <DeleteIcon /> Remove Friend
-                                        </Button>
-                                    </div>
-                                </div>
-                            ))}
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+                    </Box>
+                </Paper>
+            </Box>
+        </Container>
     )
 }
+
 export default ProfileDetails

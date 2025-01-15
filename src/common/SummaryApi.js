@@ -33,6 +33,10 @@ const SummaryApi = {
         url: '/api/user/logout',
         method: 'get',
     },
+    getUserByID: {
+        url: '/auth/api/v2/user-details',
+        method: 'get',
+    },
 }
 
 export default SummaryApi
