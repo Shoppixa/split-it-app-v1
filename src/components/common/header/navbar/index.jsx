@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react'
-
 import LoginModal from '../../../login_modal/index.jsx'
 import AppBar from '@mui/material/AppBar'
 import Toolbar from '@mui/material/Toolbar'
@@ -16,7 +15,6 @@ import RegisterModal from '../../../register_modal/index.jsx'
 import { Link, useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { persistor } from '../../../../store/store.js'
-import toast from 'react-hot-toast'
 import { logout } from '../../../../store/userSlice.js'
 
 const logoStyle = {
@@ -168,7 +166,7 @@ function AppNavbar() {
                                 color="primary"
                                 aria-label="menu"
                                 onClick={toggleDrawer(true)}
-                                sx={{ minWidth: '30px', p: '4px' }}>
+                                sx={{ minWidth: '30px' }}>
                                 <MenuIcon />
                             </Button>
                             <Drawer anchor="right" open={open} onClose={toggleDrawer(false)}>

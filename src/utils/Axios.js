@@ -12,7 +12,8 @@ const Axios = axios.create({
 //sending access token in the header
 Axios.interceptors.request.use(
     async (config) => {
-        const accessToken = localStorage.getItem('accesstoken')
+        const accessToken = localStorage.getItem('accessToken')
+
         if (accessToken) {
             config.headers.Authorization = `Bearer ${accessToken}`
         }

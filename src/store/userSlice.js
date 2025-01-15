@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import SummaryApi from '../common/SummaryApi.js'
 import Axios from '../utils/Axios.js'
-import { cleanErrorMessage } from '../utils/helpers.js'
+import { cleanErrorMessage } from '../utils/clearErrorMessage.js'
 import { AxiosToastError } from '../utils/AxiosToastError.js'
 import toast from 'react-hot-toast'
 
@@ -17,7 +17,12 @@ export const registerUser = createAsyncThunk('registerUser', async (userData, th
             ...SummaryApi.register,
             data: payload,
         })
-        return { message: response.data.message, statusCode: response.status }
+        return {
+            message: response.data.message,
+            statusCode: response.status,
+            token: response.data.token?.access,
+            refresh: response.data.token?.refresh,
+        }
     } catch (error) {
         const errorPayload = AxiosToastError(error)
         return thunkAPI.rejectWithValue({
@@ -71,6 +76,25 @@ export const loginUser = createAsyncThunk('login', async (userData, thunkAPI) =>
     }
 })
 
+export const userDetailsbyID = createAsyncThunk('userDetailsID', async (userData, thunkAPI) => {
+    try {
+        const response = await Axios({
+            ...SummaryApi.getUserByID,
+        })
+        return {
+            message: response.data.message,
+            statusCode: response.status,
+            userDetails: response.data.data,
+        }
+    } catch (error) {
+        const errorPayload = AxiosToastError(error)
+        return thunkAPI.rejectWithValue({
+            message: cleanErrorMessage(errorPayload.message),
+            statusCode: error.status,
+        })
+    }
+})
+
 const initialValue = {
     user_email: null,
     token: null,
@@ -80,6 +104,7 @@ const initialValue = {
     isLoading: false,
     isLoggedIn: false,
     statusCode: '',
+    userDetails: {},
 }
 
 const userSlice = createSlice({
@@ -113,10 +138,10 @@ const userSlice = createSlice({
                 state.user_email = action.payload.message ? action.meta.arg.email : null
                 state.isLoading = false
                 state.message = action.payload.message
-                state.message = action.payload.message
                     ? cleanErrorMessage(action.payload.message)
                     : null
                 state.statusCode = action.payload.statusCode
+                localStorage.setItem('accessToken', action.payload.token)
                 toast.success(action.payload.message || 'Account Created Successfully')
             })
             .addCase(verifyOtp.pending, (state) => {
@@ -130,7 +155,8 @@ const userSlice = createSlice({
             })
             .addCase(verifyOtp.fulfilled, (state, action) => {
                 state.isLoading = false
-                state.token = action.payload.access_token || null
+                state.token = action.payload.token || null
+                localStorage.setItem('accessToken', action.payload.token)
                 state.refresh_token = action.payload.refresh || null
                 state.message = action.payload.message
                 state.isLoggedIn = true
@@ -153,10 +179,27 @@ const userSlice = createSlice({
                 state.isLoading = false
                 state.isLoggedIn = true
                 state.token = action.payload.token || null
-                state.message = action.payload.message
+                localStorage.setItem('accessToken', action.payload.token)
                 state.message = action.payload.message
                 state.statusCode = action.payload.statusCode
-                toast.error(action.payload.message || 'Login Successful')
+                toast.success(action.payload.message || 'Login Successful')
+            })
+            .addCase(userDetailsbyID.pending, (state) => {
+                state.isLoading = true // Set loading state
+                state.message = null // Clear message
+            })
+            .addCase(userDetailsbyID.rejected, (state, action) => {
+                state.isLoading = false
+                state.message = action.payload?.message || 'Error fetching user details'
+                state.statusCode = action.payload?.statusCode
+            })
+            .addCase(userDetailsbyID.fulfilled, (state, action) => {
+                state.isLoading = false
+                state.isLoggedIn = true
+                state.message = action.payload.message
+                state.statusCode = action.payload.statusCode
+                state.userDetails = action.payload.userDetails
+                toast.success(action.payload.message || 'User Details Fetched Successful')
             })
     },
 })

@@ -13,6 +13,7 @@ import MyExpenses from '../pages/my_expenses/index.jsx'
 import Profile from '../pages/profile/index.jsx'
 import UserProfile from '../pages/user_profile/index.jsx'
 import VerifyOTP from '../pages/verify-otp/index.jsx'
+import FriendSearchPage from '../pages/friend_search/index.jsx'
 
 const router = createBrowserRouter([
     {
@@ -72,6 +73,14 @@ const router = createBrowserRouter([
                 element: (
                     <ProtectedRoute>
                         <Friends />
+                    </ProtectedRoute>
+                ),
+            },
+            {
+                path: 'friend-search',
+                element: (
+                    <ProtectedRoute>
+                        <FriendSearchPage />
                     </ProtectedRoute>
                 ),
             },

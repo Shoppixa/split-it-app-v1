@@ -1,8 +1,15 @@
 import GroupChart from './group_chart.jsx'
 import MyExpenseCategoryChart from './expense_category_chart.jsx'
 import ExpenseChart from './expense_chart.jsx'
+import { useDispatch } from 'react-redux'
+import { userDetailsbyID } from '../../../store/userSlice.js'
+import { useEffect } from 'react'
 
 const DashboardMainContent = () => {
+    const dispatch = useDispatch()
+    useEffect(() => {
+        dispatch(userDetailsbyID())
+    }, [])
     return (
         <>
             <h4 className="text-center mt-5 mb-2 shadow-5-strong p-2 fw-bolder">Expense Reports</h4>

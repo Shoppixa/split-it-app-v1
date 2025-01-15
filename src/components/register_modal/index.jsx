@@ -33,7 +33,7 @@ const RegisterModal = ({ openRegisterModal, handleCloseRegisterModal }) => {
     }
 
     useEffect(() => {
-        if (message && user_email) {
+        if (openRegisterModal && message && user_email) {
             handleCloseRegisterModal()
             const timer = setTimeout(() => {
                 navigate('/verify-otp')

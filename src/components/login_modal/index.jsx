@@ -13,9 +13,8 @@ import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { loginUser } from '../../store/userSlice'
 import CustomMessage from '../common/custom_message'
-import toast from 'react-hot-toast'
 
-const LoginModal = (props) => {
+const LoginModal = ({ openLoginModal, handleCloseLoginModal }) => {
     const navigate = useNavigate()
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
@@ -31,8 +30,8 @@ const LoginModal = (props) => {
     }
 
     useEffect(() => {
-        if (token) {
-            props.handleCloseLoginModal()
+        if (openLoginModal && token) {
+            handleCloseLoginModal()
             const timer = setTimeout(() => {
                 navigate('/dashboard')
             }, 200)
@@ -55,17 +54,16 @@ const LoginModal = (props) => {
             <Modal
                 aria-labelledby="transition-modal-title"
                 aria-describedby="transition-modal-description"
-                open={props.openLoginModal}
-                onClose={props.handleCloseLoginModal}
+                open={openLoginModal}
+                onClose={handleCloseLoginModal}
                 closeAfterTransition
                 slots={{ backdrop: Backdrop }}
                 slotProps={{
                     backdrop: {
                         timeout: 200,
                     },
-                }}
-            >
-                <Fade in={props.openLoginModal}>
+                }}>
+                <Fade in={openLoginModal}>
                     <Box sx={style} className="loginModalBody">
                         <div className="d-flex flex-column mt-0">
                             <div className="text-center text-dark">
@@ -83,8 +81,7 @@ const LoginModal = (props) => {
                                         backgroundColor: '#dd4b39',
                                         maxWidth: '0',
                                     }}
-                                    href="#"
-                                >
+                                    href="#">
                                     <GoogleIcon className="text-light" />
                                 </Button>
                                 <Button
@@ -93,8 +90,7 @@ const LoginModal = (props) => {
                                         backgroundColor: '#3b5998',
                                         maxWidth: '0',
                                     }}
-                                    href="#"
-                                >
+                                    href="#">
                                     <FacebookIcon className="text-light" />
                                 </Button>
                                 <Button
@@ -103,8 +99,7 @@ const LoginModal = (props) => {
                                         backgroundColor: '#ac2bac',
                                         maxWidth: '0',
                                     }}
-                                    href="#"
-                                >
+                                    href="#">
                                     <GitHubIcon className="text-light" />
                                 </Button>
                             </div>
@@ -136,8 +131,7 @@ const LoginModal = (props) => {
                                     variant="contained"
                                     className="my-4 w-100"
                                     onClick={handleLogin}
-                                    disabled={isLoading}
-                                >
+                                    disabled={isLoading}>
                                     Sign in
                                 </Button>
                                 <a className="text-muted" href="#!">

@@ -10,7 +10,7 @@ const SummaryApi = {
         method: 'post',
     },
     forgot_password: {
-        url: '/api/user/forgot-password',
+        url: 'auth/api/user/forgot-password',
         method: 'put',
     },
     verify_otp: {
@@ -25,8 +25,16 @@ const SummaryApi = {
         url: 'api/user/refresh-token',
         method: 'post',
     },
+    friendSearch: {
+        url: 'auth/api/v2/all-users',
+        method: 'get',
+    },
     logout: {
         url: '/api/user/logout',
+        method: 'get',
+    },
+    getUserByID: {
+        url: '/auth/api/v2/user-details',
         method: 'get',
     },
 }
