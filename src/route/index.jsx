@@ -2,7 +2,7 @@ import { createBrowserRouter } from 'react-router-dom'
 import App from '../App'
 import Homepage from '../pages/home/index.jsx'
 import UserDashboard from '../pages/dashboard/index.jsx'
-import ProtectedRoute from '../components/protected_component/index.jsx'
+import ProtectedRoute from '../layouts/protected_component'
 import LoginPage from '../pages/login/index.jsx'
 import RegisterPage from '../pages/register/index.jsx'
 import Group from '../pages/groups/group.jsx'
@@ -14,6 +14,7 @@ import Profile from '../pages/profile/index.jsx'
 import UserProfile from '../pages/user_profile/index.jsx'
 import VerifyOTP from '../pages/verify-otp/index.jsx'
 import FriendSearchPage from '../pages/friend_search/index.jsx'
+import DashboardLayout from '../layouts/dashboard/index.jsx'
 
 const router = createBrowserRouter([
     {
@@ -45,76 +46,82 @@ const router = createBrowserRouter([
             //     element : <ResetPassword/>
             // },
             {
-                path: 'dashboard',
-                element: (
-                    <ProtectedRoute>
-                        <UserDashboard />
-                    </ProtectedRoute>
-                ),
-            },
-            {
-                path: 'profile',
-                element: (
-                    <ProtectedRoute>
-                        <Profile />
-                    </ProtectedRoute>
-                ),
-            },
-            {
-                path: 'groups',
-                element: (
-                    <ProtectedRoute>
-                        <Groups />
-                    </ProtectedRoute>
-                ),
-            },
-            {
-                path: 'friends',
-                element: (
-                    <ProtectedRoute>
-                        <Friends />
-                    </ProtectedRoute>
-                ),
-            },
-            {
-                path: 'friend-search',
-                element: (
-                    <ProtectedRoute>
-                        <FriendSearchPage />
-                    </ProtectedRoute>
-                ),
-            },
-            {
-                path: 'myexpenses',
-                element: (
-                    <ProtectedRoute>
-                        <MyExpenses />
-                    </ProtectedRoute>
-                ),
-            },
-            {
-                path: '/group/:id',
-                element: (
-                    <ProtectedRoute>
-                        <Group />
-                    </ProtectedRoute>
-                ),
-            },
-            {
-                path: '/user/:id',
-                element: (
-                    <ProtectedRoute>
-                        <UserProfile />
-                    </ProtectedRoute>
-                ),
-            },
-            {
-                path: '/expense/:id',
-                element: (
-                    <ProtectedRoute>
-                        <ExpenseDetails />
-                    </ProtectedRoute>
-                ),
+                path: '',
+                element: <DashboardLayout />,
+                children: [
+                    {
+                        path: 'dashboard',
+                        element: (
+                            <ProtectedRoute>
+                                <UserDashboard />
+                            </ProtectedRoute>
+                        ),
+                    },
+                    {
+                        path: 'profile',
+                        element: (
+                            <ProtectedRoute>
+                                <Profile />
+                            </ProtectedRoute>
+                        ),
+                    },
+                    // {
+                    //     path: 'groups',
+                    //     element: (
+                    //         <ProtectedRoute>
+                    //             <Groups />
+                    //         </ProtectedRoute>
+                    //     ),
+                    // },
+                    // {
+                    //     path: 'friends',
+                    //     element: (
+                    //         <ProtectedRoute>
+                    //             <Friends />
+                    //         </ProtectedRoute>
+                    //     ),
+                    // },
+                    // {
+                    //     path: 'friend-search',
+                    //     element: (
+                    //         <ProtectedRoute>
+                    //             <FriendSearchPage />
+                    //         </ProtectedRoute>
+                    //     ),
+                    // },
+                    // {
+                    //     path: 'myexpenses',
+                    //     element: (
+                    //         <ProtectedRoute>
+                    //             <MyExpenses />
+                    //         </ProtectedRoute>
+                    //     ),
+                    // },
+                    // {
+                    //     path: '/group/:id',
+                    //     element: (
+                    //         <ProtectedRoute>
+                    //             <Group />
+                    //         </ProtectedRoute>
+                    //     ),
+                    // },
+                    // {
+                    //     path: '/user/:id',
+                    //     element: (
+                    //         <ProtectedRoute>
+                    //             <UserProfile />
+                    //         </ProtectedRoute>
+                    //     ),
+                    // },
+                    // {
+                    //     path: '/expense/:id',
+                    //     element: (
+                    //         <ProtectedRoute>
+                    //             <ExpenseDetails />
+                    //         </ProtectedRoute>
+                    //     ),
+                    // },
+                ],
             },
             // {
             //     path: "success",

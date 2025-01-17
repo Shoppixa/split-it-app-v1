@@ -46,9 +46,10 @@ function App() {
                     },
                     error: {
                         style: {
-                          borderRadius: '10px',
-                          background: 'linear-gradient(to left,rgb(222, 135, 135),rgb(107, 11, 11))',
-                          color: '#fff',
+                            borderRadius: '10px',
+                            background:
+                                'linear-gradient(to left,rgb(222, 135, 135),rgb(107, 11, 11))',
+                            color: '#fff',
                         },
                     },
                 }}

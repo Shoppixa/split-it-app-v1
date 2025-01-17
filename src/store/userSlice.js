@@ -118,8 +118,9 @@ const userSlice = createSlice({
         logout: (state) => {
             state.user_email = null
             state.token = null
-            ;(state.refresh_token = null), (state.isLoggedIn = false), (state.isLoading = false)
+            state.isLoading = false
             state.isLoggedIn = false
+            localStorage.removeItem('accessToken')
             toast.success('Logged out successfully')
         },
     },
