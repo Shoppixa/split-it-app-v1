@@ -33,6 +33,11 @@ export const SearchHeader = () => {
                     </IconButton>
                 ),
             }}
+            sx={{
+                bgcolor: 'white',
+                borderRadius: '4px',
+                width: { xs: '150px', sm: '300px' },
+            }}
         />
     )
 }
