@@ -9,7 +9,6 @@ import { useDispatch, useSelector } from 'react-redux'
 import { registerUser } from '../../store/userSlice.js'
 import CustomMessage from '../common/custom_message/index.jsx'
 import Loader from '../common/loader/index.jsx'
-import toast from 'react-hot-toast'
 
 const RegisterForm = () => {
     const navigate = useNavigate()

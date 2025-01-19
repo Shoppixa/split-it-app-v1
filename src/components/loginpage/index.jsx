@@ -8,7 +8,6 @@ import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { loginUser } from '../../store/userSlice'
 import CustomMessage from '../common/custom_message'
-import toast from 'react-hot-toast'
 
 const LoginForm = () => {
     const navigate = useNavigate()
